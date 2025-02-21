@@ -47,14 +47,14 @@
             <NotGenerated>0</NotGenerated>
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
-          <OutputDirectory>.\</OutputDirectory>
+          <OutputDirectory>.\Objects\</OutputDirectory>
           <OutputName>Lab05</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>0</CreateHexFile>
           <DebugInformation>1</DebugInformation>
           <BrowseInformation>1</BrowseInformation>
-          <ListingPath>.\</ListingPath>
+          <ListingPath>.\Listings\</ListingPath>
           <HexFormatSelection>1</HexFormatSelection>
           <Merge32K>0</Merge32K>
           <CreateBatchFile>0</CreateBatchFile>
@@ -125,47 +125,6 @@
             <HexOffset>0</HexOffset>
             <Oh166RecLen>16</Oh166RecLen>
           </OPTHX>
-          <Simulator>
-            <UseSimulator>0</UseSimulator>
-            <LoadApplicationAtStartup>1</LoadApplicationAtStartup>
-            <RunToMain>1</RunToMain>
-            <RestoreBreakpoints>1</RestoreBreakpoints>
-            <RestoreWatchpoints>1</RestoreWatchpoints>
-            <RestoreMemoryDisplay>1</RestoreMemoryDisplay>
-            <RestoreFunctions>1</RestoreFunctions>
-            <RestoreToolbox>1</RestoreToolbox>
-            <LimitSpeedToRealTime>0</LimitSpeedToRealTime>
-            <RestoreSysVw>1</RestoreSysVw>
-          </Simulator>
-          <Target>
-            <UseTarget>1</UseTarget>
-            <LoadApplicationAtStartup>1</LoadApplicationAtStartup>
-            <RunToMain>1</RunToMain>
-            <RestoreBreakpoints>1</RestoreBreakpoints>
-            <RestoreWatchpoints>1</RestoreWatchpoints>
-            <RestoreMemoryDisplay>1</RestoreMemoryDisplay>
-            <RestoreFunctions>0</RestoreFunctions>
-            <RestoreToolbox>1</RestoreToolbox>
-            <RestoreTracepoints>1</RestoreTracepoints>
-            <RestoreSysVw>1</RestoreSysVw>
-          </Target>
-          <RunDebugAfterBuild>0</RunDebugAfterBuild>
-          <TargetSelection>0</TargetSelection>
-          <SimDlls>
-            <CpuDll></CpuDll>
-            <CpuDllArguments></CpuDllArguments>
-            <PeripheralDll></PeripheralDll>
-            <PeripheralDllArguments></PeripheralDllArguments>
-            <InitializationFile></InitializationFile>
-          </SimDlls>
-          <TargetDlls>
-            <CpuDll></CpuDll>
-            <CpuDllArguments></CpuDllArguments>
-            <PeripheralDll></PeripheralDll>
-            <PeripheralDllArguments></PeripheralDllArguments>
-            <InitializationFile></InitializationFile>
-            <Driver>BIN\UL2CM3.DLL</Driver>
-          </TargetDlls>
         </DebugOption>
         <Utilities>
           <Flash1>
@@ -297,17 +256,17 @@
                 <Size>0x0</Size>
               </XRAM>
               <OCR_RVCT1>
-                <Type>0</Type>
+                <Type>1</Type>
                 <StartAddress>0x0</StartAddress>
                 <Size>0x0</Size>
               </OCR_RVCT1>
               <OCR_RVCT2>
-                <Type>0</Type>
+                <Type>1</Type>
                 <StartAddress>0x0</StartAddress>
                 <Size>0x0</Size>
               </OCR_RVCT2>
               <OCR_RVCT3>
-                <Type>0</Type>
+                <Type>1</Type>
                 <StartAddress>0x0</StartAddress>
                 <Size>0x0</Size>
               </OCR_RVCT3>
@@ -419,9 +378,128 @@
       <Groups>
         <Group>
           <GroupName>Source Group 1</GroupName>
+          <Files>
+            <File>
+              <FileName>ADC14.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\ADC14.c</FilePath>
+            </File>
+            <File>
+              <FileName>ControlPins.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\ControlPins.c</FilePath>
+            </File>
+            <File>
+              <FileName>CortexM.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\CortexM.c</FilePath>
+            </File>
+            <File>
+              <FileName>Lab5-ADC.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Lab5-ADC.c</FilePath>
+            </File>
+            <File>
+              <FileName>Lab5-Camera.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Lab5-Camera.c</FilePath>
+            </File>
+            <File>
+              <FileName>Lab5-Timer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Lab5-Timer.c</FilePath>
+            </File>
+            <File>
+              <FileName>main.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\main.c</FilePath>
+            </File>
+            <File>
+              <FileName>SysTickTimer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\SysTickTimer.c</FilePath>
+            </File>
+            <File>
+              <FileName>Timer32.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Timer32.c</FilePath>
+            </File>
+            <File>
+              <FileName>ADC14.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\ADC14.h</FilePath>
+            </File>
+            <File>
+              <FileName>ControlPins.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\ControlPins.h</FilePath>
+            </File>
+            <File>
+              <FileName>CortexM.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\CortexM.h</FilePath>
+            </File>
+            <File>
+              <FileName>SysTickTimer.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\SysTickTimer.h</FilePath>
+            </File>
+            <File>
+              <FileName>Timer32.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Timer32.h</FilePath>
+            </File>
+            <File>
+              <FileName>Common.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Common.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>::CMSIS</GroupName>
+        </Group>
+        <Group>
+          <GroupName>::Device</GroupName>
         </Group>
       </Groups>
     </Target>
   </Targets>
+
+  <RTE>
+    <apis/>
+    <components>
+      <component Cclass="CMSIS" Cgroup="CORE" Cvendor="ARM" Cversion="5.6.0" condition="ARMv6_7_8-M Device">
+        <package name="CMSIS" schemaVersion="1.7.7" url="http://www.keil.com/pack/" vendor="ARM" version="5.9.0"/>
+        <targetInfos>
+          <targetInfo name="Target 1"/>
+        </targetInfos>
+      </component>
+      <component Cclass="Device" Cgroup="Startup" Cvendor="TexasInstruments" Cversion="3.2.2" condition="isMSP432P401R">
+        <package license="license.txt" name="MSP432P4xx_DFP" schemaVersion="1.3" supportContact="http://e2e.ti.com/support/microcontrollers/msp430/" url="http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/msp432cmsis/latest/exports/" vendor="TexasInstruments" version="3.2.6"/>
+        <targetInfos>
+          <targetInfo name="Target 1"/>
+        </targetInfos>
+      </component>
+    </components>
+    <files>
+      <file attr="config" category="source" condition="Startup ARM" name="Device\Source\startup_msp432p401r_uvision.s" version="3.2.2">
+        <instance index="0">RTE\Device\MSP432P401R\startup_msp432p401r_uvision.s</instance>
+        <component Cclass="Device" Cgroup="Startup" Cvendor="TexasInstruments" Cversion="3.2.2" condition="isMSP432P401R"/>
+        <package license="license.txt" name="MSP432P4xx_DFP" schemaVersion="1.3" supportContact="http://e2e.ti.com/support/microcontrollers/msp430/" url="http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/msp432cmsis/latest/exports/" vendor="TexasInstruments" version="3.2.6"/>
+        <targetInfos>
+          <targetInfo name="Target 1"/>
+        </targetInfos>
+      </file>
+      <file attr="config" category="source" name="Device\Source\system_msp432p401r.c" version="3.2.2">
+        <instance index="0">RTE\Device\MSP432P401R\system_msp432p401r.c</instance>
+        <component Cclass="Device" Cgroup="Startup" Cvendor="TexasInstruments" Cversion="3.2.2" condition="isMSP432P401R"/>
+        <package license="license.txt" name="MSP432P4xx_DFP" schemaVersion="1.3" supportContact="http://e2e.ti.com/support/microcontrollers/msp430/" url="http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/msp432cmsis/latest/exports/" vendor="TexasInstruments" version="3.2.6"/>
+        <targetInfos>
+          <targetInfo name="Target 1"/>
+        </targetInfos>
+      </file>
+    </files>
+  </RTE>
 
 </Project>

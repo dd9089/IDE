@@ -24,7 +24,7 @@ void ADC0_InitSWTriggerCh6(void)
 {
 	// wait for reference to be idle
 	// REF_A->CTL0
-  ;       
+  while (REF_A->CTL0 & BITA);
 		
 	// set reference voltage to 2.5V
 	// 1) configure reference for static 2.5V
@@ -37,7 +37,7 @@ void ADC0_InitSWTriggerCh6(void)
 
 	// 2) ADC14ENC = 0 to allow programming
 	// ADC14->CTL0
-  ;        
+  ADC14->CTL0 &= !BIT1;        
 
 	// 3) wait for BUSY to be zero		
 	// ADC14->CTL0
@@ -68,9 +68,13 @@ void ADC0_InitSWTriggerCh6(void)
 	// ------------------------------------------------------------------
 	// 4) single, SMCLK, on, disabled, /1, 32 clocks, SHM	pulse-mode
 	// ADC14->CTL0
-  ;       
-	
-	
+	ADC14->CTL0 |= BIT(26);
+	ADC14->CTL0 |= BIT(21);
+	ADC14->CTL0 |= BITD;
+	ADC14->CTL0 |= BITC;
+	ADC14->CTL0 |= BIT9;
+	ADC14->CTL0 |= BIT8;
+	ADC14->CTL0 |= BIT4;
 	
 	  // 20-16 STARTADDx  start addr          00000b = ADC14MEM0
   // 15-6  reserved                  0000000000b (reserved)
@@ -83,8 +87,8 @@ void ADC0_InitSWTriggerCh6(void)
 	//
 	// 5) ADC14MEM0, 14-bit, ref on, regular power
 	// ADC14->CTL1
-  ;          
-		
+  ADC14->CTL1 |= BIT5;
+	ADC14->CTL1 |= BIT4;	
 		
 
 	// ADC14->MCTL[0]

@@ -24,7 +24,7 @@ void ADC0_InitSWTriggerCh6(void)
 {
 	// wait for reference to be idle
 	// REF_A->CTL0
-  while (REF_A->CTL0 & BITA);
+  while ((REF_A->CTL0 & BITA) == BITA);
 		
 	// set reference voltage to 2.5V
 	// 1) configure reference for static 2.5V

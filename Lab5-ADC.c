@@ -33,7 +33,10 @@ unsigned long MillisecondCounter = 0;
 // Interrupt Service Routine for Timer32-1
 void Timer32_1_ISR(void)
 {
+		TIMER32_1->INTCLR = 1;
+		Timer1RunningFlag = TRUE;
 
+	
 }
 // Interrupt Service Routine
 void Timer32_2_ISR(void)
@@ -61,7 +64,9 @@ int main(void)
 	EnableInterrupts();
   while(1)
 	{
-		;
+		analogIn = ADC_In();
+		sprintf(temp, "ADC Value: %u (0x%X)\r\n", analogIn, analogIn);
+		put(temp);
 		
   }
 }

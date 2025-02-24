@@ -33,6 +33,8 @@ void Switch1_Init(void)
 	// interrupt flag (clear)
 	P1 -> IFG &= ~BIT1;
 	
+	//NOTE: the three above lines are also used in Lab5-Timer, Switch1_Interrupt_Init()
+	
 }
 
 void Switch2_Init(void)
@@ -57,6 +59,8 @@ void Switch2_Init(void)
 	
 	// interrupt flag (clear)
 	P1 -> IFG &= ~BIT4;	
+	
+	//NOTE: the three above lines are also used in Lab5-Timer, Switch2_Interrupt_Init()
 	
 }
 

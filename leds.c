@@ -38,7 +38,9 @@ void LED1_Off(void)
 	P1 -> OUT &= ~BIT0;
 }
 
-
+BOOLEAN LED1_State(){
+	return (P1 -> OUT & BIT0);
+}
 //LED2 (RGB)
 void LED2_Init(void)
 {
@@ -114,5 +116,9 @@ void LED2_On(int col){
 		P2 -> OUT |= BIT1;
 	}
 	
+}
+
+BOOLEAN LED2_State(){
+	return FALSE;
 }
 	

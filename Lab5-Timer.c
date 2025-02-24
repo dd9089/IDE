@@ -124,8 +124,9 @@ void PORT1_IRQHandler(void)
 	{
 		// acknowledge P1.1 is pressed, by setting BIT1 to zero - remember P1.1 is switch 1
 		// clear flag, acknowledge
-    P1 -> IFG &= ~BIT1;     
-		//how do you 'acknowledge'?
+    P1 -> IFG &= ~BIT1;  
+		//Timer32_1_ISR();
+		uart0_put("\r\nIRQ Handler SW 1\r\n");
 
 
   }
@@ -134,8 +135,8 @@ void PORT1_IRQHandler(void)
 	{
 		// acknowledge P1.4 is pressed, by setting BIT4 to zero - remember P1.4 is switch 2
     P1 -> IFG &= ~BIT4;     // clear flag4, acknowledge
-		//how do you 'acknowledge'?
-		
+		//Timer32_2_ISR();
+		uart0_put("\r\nDoes this get skipped?\r\n");
   }
 }
 
@@ -146,6 +147,7 @@ void PORT1_IRQHandler(void)
 //
 void Timer32_1_ISR(void)
 {
+	uart0_put("\r\nTimer 31 1 ISR\r\n");
 	if (LED1_State() == FALSE )
 	{
 		LED1_On();
@@ -160,7 +162,7 @@ void Timer32_1_ISR(void)
 //
 void Timer32_2_ISR(void)
 {
-
+		//uart0_put("\r\nTimer 32 2 ISR\r\n");
 		MillisecondCounter++;
 
 }
@@ -176,13 +178,11 @@ int main(void){
 	uart0_init();
 	uart0_put("\r\nLab5 Timer demo\r\n");
 	// Set the Timer32-2 to 2Hz (0.5 sec between interrupts)
-	//Timer32_1_Init(&Timer32_1_ISR, SystemCoreClock/2, T32DIV1); // initialize Timer A32-1;
-        ;
+	Timer32_1_Init(&Timer32_1_ISR, SystemCoreClock/2, T32DIV1); // initialize Timer A32-1;
         
 	// Setup Timer32-2 with a .001 second timeout.
 	// So use DEFAULT_CLOCK_SPEED/(1/0.001) = SystemCoreClock/1000
 	//Timer32_2_Init(&Timer32_2_ISR, SystemCoreClock/1000, T32DIV1); // initialize Timer A32-1;
-	;
     
 	Switch1_Interrupt_Init();
 	Switch2_Interrupt_Init();

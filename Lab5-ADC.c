@@ -61,12 +61,16 @@ int main(void)
 	LED2_Init();
 	Switch2_Init();
 	ADC0_InitSWTriggerCh6();
+	Timer32_1_Init(&Timer32_1_ISR, 1500000, 1);
 	EnableInterrupts();
   while(1)
 	{
-		analogIn = ADC_In();
-		sprintf(temp, "ADC Value: %u (0x%X)\r\n", analogIn, analogIn);
-		put(temp);
+		if (Timer1RunningFlag == TRUE){
+			analogIn = ADC_In();
+			sprintf(temp, "ADC Value: %u (0x%X)\r\n", analogIn, analogIn);
+			put(temp);
+			Timer1RunningFlag = FALSE;
+		}
 		
   }
 }

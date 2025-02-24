@@ -112,19 +112,19 @@ void ADC0_InitSWTriggerCh6(void)
 	// 7) no interrupts
 	// ADC14->IER0
 	// ADC14->IER1
-  ;                     
-  ;                     // no interrupts
+		ADC14->IER0 = 0;                     
+		ADC14->IER1 = 0;// no interrupts
 	//
 	// P4.7 is Analog In A6
 	// 8) analog mode on A6, P4.7
 	// set pins for ADC A6
 	// SEL0, SEL1
-  ;                  
-  ;
+		P4->SEL0 |= BIT7;
+		P4->SEL1 |= BIT7;
 	
 	// 9) enable
 	// ADC14->CTL0
-  ;         
+  	ADC14->CTL0 |= BIT1;        
 }
 
 
@@ -143,16 +143,16 @@ unsigned int  ADC_In(void)
 		
 	// 2) start single conversion	  
 	// ADC14->CTL0
-  ;  
+		ADC14->CTL0 |= BIT0;  
 
 	// 3) wait for ADC14->IFGR0, ADC14->IFGR0 bit 0 is set when conversion done
 	// ADC14->IFGR0
-  ;  
+		while(ADC14->IFGR0 & BIT0){};  
 		
 	// 14 bit sample returned  ADC14->MEM[0]
 	// ADC14->MEM[0] 14-bit conversion in bits 13-0 (31-16 undefined, 15-14 zero)
 	// ADC14->MEM[0]
-	adcIn = ;
+	adcIn = ADC14->MEM[0];
 		
   return adcIn;                 // 4) return result 0 to 16383
 }

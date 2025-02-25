@@ -28,6 +28,8 @@ BOOLEAN Timer2RunningFlag = FALSE;
 
 unsigned long MillisecondCounter = 0;
 
+unsigned int analogIn = 0;
+
 
 
 // Interrupt Service Routine for Timer32-1
@@ -35,7 +37,7 @@ void Timer32_1_ISR(void)
 {
 		TIMER32_1->INTCLR = 1;
 		Timer1RunningFlag = TRUE;
-
+		analogIn = ADC_In();
 	
 }
 // Interrupt Service Routine
@@ -50,7 +52,9 @@ void Timer32_2_ISR(void)
 int main(void)
 {
 	char temp[64];
-	unsigned int analogIn = 0;
+	double cel = 0;
+	double far = 0; 
+	double v = 0;
 	//initializations
 	uart0_init();
 	uart0_put("\r\nLab5 ADC demo\r\n");
@@ -66,7 +70,10 @@ int main(void)
   while(1)
 	{
 		if (Timer1RunningFlag == TRUE){
-			analogIn = ADC_In();
+			v = (2.5/ 16383.0) * analogIn;
+			cel = (v - 0.55) * 100;
+			far = (cel * 1.8 + 35);
+			//sprintf(temp, "Celcius: %f Farenheight: %f \r\n", cel, far);
 			sprintf(temp, "ADC Value: %u (0x%X)\r\n", analogIn, analogIn);
 			uart0_put(temp);
 			Timer1RunningFlag = FALSE;

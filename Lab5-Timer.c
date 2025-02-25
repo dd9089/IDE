@@ -70,7 +70,8 @@ void Switch1_Interrupt_Init(void)
   P1 -> IES |= BIT1; 
 	
 	// now set the pin to cause falling edge interrupt event
-  NVIC_IPR8 = (NVIC_IPR8 & 0x00FFFFFF)|0x40000000; // priority 2
+  //NVIC_IPR8 = (NVIC_IPR8 & 0x00FFFFFF)|0x40000000; // priority 2
+	NVIC_SetPriority(PORT1_IRQn, 4);
 	
 	// enable Port 1 - interrupt 35 in NVIC	
   NVIC_ISER1 = 0x00000008;  
@@ -98,7 +99,8 @@ void Switch2_Interrupt_Init(void)
   P1 -> IE |= BIT4;     
 	
 	// now set the pin to cause falling edge interrupt event
-  NVIC_IPR8 = (NVIC_IPR8&0x00FFFFFF)|0x40000000; // priority 2
+  //NVIC_IPR8 = (NVIC_IPR8&0x00FFFFFF)|0x40000000; // priority 2
+	NVIC_SetPriority(PORT1_IRQn, 4);
 	
 	// enable Port 1 - interrupt 35 in NVIC
   NVIC_ISER1 = 0x00000008;         
@@ -122,10 +124,11 @@ void PORT1_IRQHandler(void)
 	// First we check if it came from Switch1 ?
   if(P1->IFG & BIT1)  // we start a timer to toggle the LED1 1 second ON and 1 second OFF
 	{
+		// Switch 1 Pressed
+		
 		// acknowledge P1.1 is pressed, by setting BIT1 to zero - remember P1.1 is switch 1
 		// clear flag, acknowledge
     P1 -> IFG &= ~BIT1;  
-		//Timer32_1_ISR();
 		uart0_put("\r\nIRQ Handler SW 1\r\n");
 
 
@@ -133,9 +136,10 @@ void PORT1_IRQHandler(void)
 	// Now check to see if it came from Switch2 ?
   if(P1->IFG & BIT4)
 	{
+		// Switch 2 Pressed
+		
 		// acknowledge P1.4 is pressed, by setting BIT4 to zero - remember P1.4 is switch 2
     P1 -> IFG &= ~BIT4;     // clear flag4, acknowledge
-		//Timer32_2_ISR();
 		uart0_put("\r\nDoes this get skipped?\r\n");
   }
 }
@@ -174,6 +178,8 @@ void Timer32_2_ISR(void)
 //
 //
 int main(void){
+	BOOLEAN SW1 = FALSE;
+	
 	//initializations
 	uart0_init();
 	uart0_put("\r\nLab5 Timer demo\r\n");
@@ -189,8 +195,22 @@ int main(void){
 	LED1_Init();
 	LED2_Init();
 	EnableInterrupts();
+	
+	
   while(1)
 	{
-    WaitForInterrupt();
+		if (SW1){
+			TIMER32_CONTROL1 |= BIT5;
+			WaitForInterrupt();
+		}
+		if (Switch1_Pressed() && SW1){
+			SW1 = FALSE;
+		}
+		else if(Switch1_Pressed()){
+			SW1 = TRUE;
+		}
+		if (!SW1){
+			TIMER32_CONTROL1 &= ~BIT5;
+		}
   }
 }

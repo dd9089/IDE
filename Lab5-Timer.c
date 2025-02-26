@@ -30,6 +30,10 @@ BOOLEAN Timer1RunningFlag = FALSE;
 BOOLEAN Timer2RunningFlag = FALSE;
 
 unsigned long MillisecondCounter = 0;
+
+
+BOOLEAN SW1 = FALSE;
+BOOLEAN SW2 = FALSE;
 //
 
 //  I/O interrupt pin setup
@@ -70,8 +74,7 @@ void Switch1_Interrupt_Init(void)
   P1 -> IES |= BIT1; 
 	
 	// now set the pin to cause falling edge interrupt event
-  //NVIC_IPR8 = (NVIC_IPR8 & 0x00FFFFFF)|0x40000000; // priority 2
-	NVIC_SetPriority(PORT1_IRQn, 4);
+  NVIC_IPR8 = (NVIC_IPR8 & 0x00FFFFFF)|0x40000000; // priority 2
 	
 	// enable Port 1 - interrupt 35 in NVIC	
   NVIC_ISER1 = 0x00000008;  
@@ -99,8 +102,7 @@ void Switch2_Interrupt_Init(void)
   P1 -> IE |= BIT4;     
 	
 	// now set the pin to cause falling edge interrupt event
-  //NVIC_IPR8 = (NVIC_IPR8&0x00FFFFFF)|0x40000000; // priority 2
-	NVIC_SetPriority(PORT1_IRQn, 4);
+  NVIC_IPR8 = (NVIC_IPR8&0x00FFFFFF)|0x40000000; // priority 2
 	
 	// enable Port 1 - interrupt 35 in NVIC
   NVIC_ISER1 = 0x00000008;         
@@ -130,7 +132,7 @@ void PORT1_IRQHandler(void)
 		// clear flag, acknowledge
     P1 -> IFG &= ~BIT1;  
 		uart0_put("\r\nIRQ Handler SW 1\r\n");
-
+		SW1 = !SW1; //toggle switch 1/LED 1 state
 
   }
 	// Now check to see if it came from Switch2 ?
@@ -140,8 +142,26 @@ void PORT1_IRQHandler(void)
 		
 		// acknowledge P1.4 is pressed, by setting BIT4 to zero - remember P1.4 is switch 2
     P1 -> IFG &= ~BIT4;     // clear flag4, acknowledge
-		uart0_put("\r\nDoes this get skipped?\r\n");
+		uart0_put("\r\nIRQ Handler SW 2\r\n");
+		SW2 = !SW2; //toggle switch 1/LED 1 state
+		
+		//LED OFF
+		LED2_Off();
+		//LED ON (given color)
+		P2 -> OUT |= colors[colorIndex];
+		
+		if (colorIndex < 7){ 
+			colorIndex++; //increment switch 2/LED 2 state
+			uart0_put("\r\nIncrement Color Index\r\n");
+		}
+		else{
+			colorIndex = 0;
+		}
+
+
+		
   }
+	
 }
 
 //
@@ -151,7 +171,8 @@ void PORT1_IRQHandler(void)
 //
 void Timer32_1_ISR(void)
 {
-	uart0_put("\r\nTimer 31 1 ISR\r\n");
+	//uart0_put("\r\nTimer 31 1 ISR\r\n");
+	//toggles LED1
 	if (LED1_State() == FALSE )
 	{
 		LED1_On();
@@ -178,7 +199,6 @@ void Timer32_2_ISR(void)
 //
 //
 int main(void){
-	BOOLEAN SW1 = FALSE;
 	
 	//initializations
 	uart0_init();
@@ -188,29 +208,39 @@ int main(void){
         
 	// Setup Timer32-2 with a .001 second timeout.
 	// So use DEFAULT_CLOCK_SPEED/(1/0.001) = SystemCoreClock/1000
-	//Timer32_2_Init(&Timer32_2_ISR, SystemCoreClock/1000, T32DIV1); // initialize Timer A32-1;
-    
+	Timer32_2_Init(&Timer32_2_ISR, SystemCoreClock/1000, T32DIV1); // initialize Timer A32-1;
+	
 	Switch1_Interrupt_Init();
 	Switch2_Interrupt_Init();
 	LED1_Init();
 	LED2_Init();
 	EnableInterrupts();
-	
-	
-  while(1)
+		
+	while(1)
 	{
-		if (SW1){
-			TIMER32_CONTROL1 |= BIT5;
-			WaitForInterrupt();
+		if (SW1 == TRUE){
+			TIMER32_CONTROL1 |= BIT5; // enable timer interrupt
 		}
-		if (Switch1_Pressed() && SW1){
-			SW1 = FALSE;
+		else{
+			TIMER32_CONTROL1 &= ~BIT5; // disable timer interrupt
 		}
-		else if(Switch1_Pressed()){
-			SW1 = TRUE;
+		
+		//WaitForInterrupt();
+		
+		if (SW2 == TRUE){
+			//uart0_put("\r\nSW2 = TRUE\r\n");
+			TIMER32_CONTROL2 |= BIT5; // enable timer interrupt
+			
 		}
-		if (!SW1){
-			TIMER32_CONTROL1 &= ~BIT5;
+		else{
+			//uart0_put("\r\nSW2 = FALSE\r\n");
+			TIMER32_CONTROL2 &= ~BIT5; // disable timer interrupt
 		}
-  }
+		
+		
+		WaitForInterrupt();
+
+	}
+	
+	
 }

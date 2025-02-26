@@ -78,7 +78,7 @@ void Timer32_1_Init(void(*task)(void), unsigned long period, enum timer32divider
 	// interrupts enabled in the main program after all devices initialized
 	// NVIC_IPR6
   //NVIC_IPR6 = (NVIC_IPR6&0xFFFF00FF)|0x00004000; // priority 2
-	NVIC_SetPriority(T32_INT1_IRQn, 3);
+	NVIC_SetPriority(T32_INT1_IRQn, 2); // priority 2
 	// enable interrupt 25 in NVIC, NVIC_ISER0
 	// NVIC_ISER0
   NVIC_ISER0 |= BIT(25);         
@@ -147,7 +147,8 @@ void Timer32_2_Init(void(*task)(void), unsigned long period, enum timer32divider
   TIMER32_CONTROL2 = 0x000000E2;
 
 	// interrupts enabled in the main program after all devices initialized
-  NVIC_IPR6 = (NVIC_IPR6&0xFFFF00FF)|0x00004000; // priority 2
+  //NVIC_IPR6 = (NVIC_IPR6&0xFFFF00FF)|0x00004000; // priority 2
+	NVIC_SetPriority(T32_INT2_IRQn, 3); // priority 3
 	
 	// enable interrupt 26 in NVIC, NVIC_ISER0
 	// NVIC_ISER0
@@ -162,7 +163,7 @@ void T32_INT2_IRQHandler(void)
 {
 	// acknowledge Timer32 Timer 1 interrupt
 	// TIMER32_INTCLR2
-  TIMER32_INTCLR2;    
+  TIMER32_INTCLR2 = 0x00000000;    
 	
 	// execute user task
   (*Timer32_2_PeriodicTask)();               

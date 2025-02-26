@@ -30,4 +30,4 @@ void LED2_On(int);
 	
 void LED2_Off(void);
 
-BOOLEAN LED2_State(void);
+//BOOLEAN LED2_State(void);

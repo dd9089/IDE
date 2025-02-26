@@ -117,8 +117,3 @@ void LED2_On(int col){
 	}
 	
 }
-
-BOOLEAN LED2_State(){
-	return FALSE;
-}
-	

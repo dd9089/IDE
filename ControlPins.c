@@ -12,7 +12,7 @@ extern uint32_t SystemCoreClock;
 
 // default SI integration time is 7.5ms = 133Hz
 //
-#define INTEGRATION_TIME .0075f
+#define INTEGRATION_TIME .0075f //we change this value to callibrate for lighting
 
 
 
@@ -71,6 +71,17 @@ void ControlPin_SI_Init()
 	unsigned long period = CalcPeriodFromFrequency (1.0/(double)INTEGRATION_TIME);
 	// initialize P5.5 and make it output (P5.5 SI Pin)
 	
+	// configure PortPin for IO
+	P5 -> SEL0 &= ~BIT5;
+	P5 -> SEL1 &= ~BIT5;
+	
+	// configure as output
+	P5 -> DIR |= BIT5;
+	
+	P5 -> REN &= ~BIT5;
+	
+	P5 -> OUT &= ~BIT5;
+	
     // start Timer
 	Timer32_1_Init(*SI_Handler, period, T32DIV1);
 }
@@ -87,8 +98,17 @@ void ControlPin_CLK_Init()
 	// use 200000 to make a 100K clock, 1 interrupt for each edge
 	unsigned long period = CalcPeriodFromFrequency (200000);
 	// initialize P5.4 and make it output (P5.4 CLK Pin)
-
-
+	
+		// configure PortPin for IO
+	P5 -> SEL0 &= ~BIT4;
+	P5 -> SEL1 &= ~BIT4;
+	
+	// configure as output
+	P5 -> DIR |= BIT4;
+	
+	P5 -> REN &= ~BIT4;
+	
+	P5 -> OUT &= ~BIT4;
 
 	// if the period is based on a 48MHz clock, each tick would be 20.83 ns
 	// i want a 100KHz clock
@@ -120,7 +140,7 @@ void CLK_Handler(void)
 		line[pixelCounter] = ADC_val;
 		// increment the pixelCounter
 		pixelCounter = (pixelCounter + 1);
-		//are we done??
+		//checks are we done??
 		if (pixelCounter == 128)
 		{
 			// set the flag to indicate its OK to send data out uart

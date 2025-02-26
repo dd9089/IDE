@@ -13,7 +13,9 @@ void EnableSysTickTimer(void)
 {
 	// enable SysTick with core clock and interrupts
 	//SYSTICK_STCSR
-	;      
+	SYSTICK_STCSR |= BIT2;
+	SYSTICK_STCSR |= BIT1;
+	SYSTICK_STCSR |= BIT0;
 }
 
 //
@@ -23,7 +25,8 @@ void DisableSysTickTimer(void)
 {
 	// disable SysTick with core clock and interrupts 
 	// SYSTICK_STCSR
-	;      
+	SYSTICK_STCSR &= ~BIT0;      
+	//may need to clear Bits 2, 1
 }
 // numIntsPerSec is equal to the number is the 
 // number of times per second the SysTickHandler is going to be called.
@@ -42,7 +45,7 @@ void SysTickTimer_Init(void(*task)(void), unsigned long period)
 	// Control and Status Register
 	// 1) disable SysTick during setup
 	// SYSTICK_STCSR
-  ;  
+  DisableSysTickTimer();  
 	
 	// NOTE: The STRVR - RELOAD VALUE REGISTER)is a 24 bit value
 	// 2) reload value sets period
@@ -52,7 +55,7 @@ void SysTickTimer_Init(void(*task)(void), unsigned long period)
 	// Current Value Register
 	// 3) any write to current clears it
 	// SYSTICK_STCVR
-  ;    
+  SYSTICK_STCVR = 0x00000000;    
 
 	// priority 2
 	// SCB_SHPR3
@@ -75,7 +78,7 @@ void SysTickTimer_Init(void(*task)(void), unsigned long period)
  
 	// 4) enable SysTick with core clock and interrupts	
 	// SYSTICK_STCSR
-	;      // 4) enable SysTick with core clock and interrupts
+	EnableSysTickTimer();      // 4) enable SysTick with core clock and interrupts
 
 	EndCritical(sr);
 	// the client will need to Enable Interrupts

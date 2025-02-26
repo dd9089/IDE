@@ -101,7 +101,7 @@ int main(void)
 	uart0_put("\r\nINIT LEDs\r\n");
 	LED1_Init();
 	LED2_Init();
-	// remember that we double the desired frequency because we need to account
+	// remember that we double the desired frequency because we need to account for aliasing
 
 	uart0_put("\r\nINIT Camera CLK and SI\r\n");
 	uart0_put("\r\nINIT ADC\r\n");	

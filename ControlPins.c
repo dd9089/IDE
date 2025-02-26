@@ -31,8 +31,8 @@ extern uint32_t SystemCoreClock;
 unsigned long tempCounter = 0;
 static long pixelCounter = 0;
 
-extern uint16_t line[128];
-extern BOOLEAN g_sendData;
+uint16_t line[128];
+BOOLEAN g_sendData = FALSE;
 
 
 ////////////////////////////////////////////

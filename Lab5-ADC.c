@@ -72,7 +72,7 @@ int main(void)
 		if (Timer1RunningFlag == TRUE){
 			v = (2.5/ 16383.0) * analogIn;
 			cel = (v - 0.55) * 100;
-			far = (cel * 1.8 + 35);
+			far = (cel * 1.8 + 32);
 			//sprintf(temp, "Celcius: %f Farenheight: %f \r\n", cel, far);
 			sprintf(temp, "ADC Value: %u (0x%X)\r\n", analogIn, analogIn);
 			uart0_put(temp);

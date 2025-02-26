@@ -8,11 +8,11 @@
 #include "Common.h"  // from Lab1 code
 
 #define RED     (BYTE)(0x1) //0001
-#define GREEN   (BYTE)(0x4) //0100
-#define BLUE    (BYTE)(0x2) //0010
-#define CYAN    (BYTE)(0x0) //0000
-#define MAGENTA (BYTE)(0x3) //0011
-#define YELLOW  (BYTE)(0x5) //0101
+#define GREEN   (BYTE)(0x2) //0010
+#define BLUE    (BYTE)(0x4) //0100
+#define CYAN    (BYTE)(0x6) //0000
+#define MAGENTA (BYTE)(0x5) //0101
+#define YELLOW  (BYTE)(0x3) //0011
 #define WHITE   (BYTE)(0x7) //0111
 
 void LED1_Init(void);

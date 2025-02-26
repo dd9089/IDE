@@ -130,8 +130,8 @@ void PORT1_IRQHandler(void)
 		
 		// acknowledge P1.1 is pressed, by setting BIT1 to zero - remember P1.1 is switch 1
 		// clear flag, acknowledge
+		//uart0_put("\r\nIRQ Handler SW 1\r\n");
     P1 -> IFG &= ~BIT1;  
-		uart0_put("\r\nIRQ Handler SW 1\r\n");
 		SW1 = !SW1; //toggle switch 1/LED 1 state
 
   }
@@ -141,24 +141,24 @@ void PORT1_IRQHandler(void)
 		// Switch 2 Pressed
 		
 		// acknowledge P1.4 is pressed, by setting BIT4 to zero - remember P1.4 is switch 2
-    P1 -> IFG &= ~BIT4;     // clear flag4, acknowledge
-		uart0_put("\r\nIRQ Handler SW 2\r\n");
+		//uart0_put("\r\nIRQ Handler SW 2\r\n");    
+		P1 -> IFG &= ~BIT4;     // clear flag4, acknowledge
 		SW2 = !SW2; //toggle switch 1/LED 1 state
 		
-		//LED OFF
-		LED2_Off();
-		//LED ON (given color)
-		P2 -> OUT |= colors[colorIndex];
-		
-		if (colorIndex < 7){ 
+		if (colorIndex < 7 && SW2){}
+		else if (colorIndex < 7 && !SW2){
+			//uart0_put("\r\nIncrement Color Index\r\n");
 			colorIndex++; //increment switch 2/LED 2 state
-			uart0_put("\r\nIncrement Color Index\r\n");
+			
+			sprintf(temp, "Time Elapsed(ms): %lu\r\n", MillisecondCounter);
+			uart0_put(temp);
 		}
 		else{
 			colorIndex = 0;
 		}
-
-
+		
+		//LED OFF
+		LED2_Off();
 		
   }
 	
@@ -229,12 +229,18 @@ int main(void){
 		
 		if (SW2 == TRUE){
 			//uart0_put("\r\nSW2 = TRUE\r\n");
+			//MillisecondCounter = 0;
 			TIMER32_CONTROL2 |= BIT5; // enable timer interrupt
+			
+			//LED ON (given color)
+			P2 -> OUT |= colors[colorIndex];
 			
 		}
 		else{
 			//uart0_put("\r\nSW2 = FALSE\r\n");
 			TIMER32_CONTROL2 &= ~BIT5; // disable timer interrupt
+			MillisecondCounter = 0;
+			
 		}
 		
 		

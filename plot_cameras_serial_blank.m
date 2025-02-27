@@ -45,7 +45,6 @@ while (1)
         %val
         if ((val == -1) || (val == -3)) % -1 and -3 are start keywords
             count = 1;
-            val
         elseif (val == -2) % End camera1 tx
             if (count >= 128)
                 plotdata(trace, 1);
@@ -77,6 +76,9 @@ drawnow;
 subplot(4,2,cam);
 %figure(figureHandle);
 plot(trace);
+xlabel("Pixels");
+ylabel("Intensity");
+title("Raw");
 %set(figureHandle,'Visible','on');
 
 %SMOOTH AND PLOT
@@ -88,14 +90,19 @@ smoothtrace = movmean(trace, 5);
 subplot(4,2,cam+2);
 %figure(smoothhand);
 plot(smoothtrace);
+xlabel("Pixels");
+ylabel("Intensity");
+title("5-point Average");
 
 %THRESHOLD
 %calculate 1's and 0's via thresholding
 maxval = max(smoothtrace);
+minval = min(smoothtrace);
+avg = (maxval + minval) / 2;
 for i = 1:128
     %Edge detection (binary 0 or 1)
     if (smoothtrace(i) >= avg)
-            bintrace(i)=1;
+        bintrace(i)=1;
     else
         bintrace(i)=0;
     end
@@ -104,7 +111,9 @@ drawnow;
 subplot(4,2,cam+4);
 %figure(binfighand);
 plot(bintrace);
-
+xlabel("Pixels");
+ylabel("Intensity");
+title("Binary");
 end %function
 
 function myCleanupFun(serialObject)

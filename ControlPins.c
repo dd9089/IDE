@@ -12,7 +12,7 @@ extern uint32_t SystemCoreClock;
 
 // default SI integration time is 7.5ms = 133Hz
 //
-#define INTEGRATION_TIME .0075f //we change this value to callibrate for lighting
+#define INTEGRATION_TIME .05f //we change this value to callibrate for lighting
 
 
 
@@ -46,9 +46,12 @@ void SI_Handler(void)
 	if ((P5->OUT & CLK) != 0)
 		P5->OUT &= ~CLK; // set the clock low in case it was high.
 	// Read the TSL1401 instructions for SI, CLCK to start the data transfer process
-
+	P5->OUT |= SI;
+	P5->OUT |= CLK;
 	// OK, Data should be ready to clock out, so start the clock
 	// Start the clock after we issues a SI pulse.
+		P5->OUT &= ~SI;
+		P5->OUT &= ~CLK;
 	EnableSysTickTimer();                            
 }
 

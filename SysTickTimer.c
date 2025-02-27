@@ -25,7 +25,9 @@ void DisableSysTickTimer(void)
 {
 	// disable SysTick with core clock and interrupts 
 	// SYSTICK_STCSR
-	SYSTICK_STCSR &= ~BIT0;      
+	SYSTICK_STCSR &= ~BIT2;
+	SYSTICK_STCSR &= ~BIT1;
+	SYSTICK_STCSR &= ~BIT0;
 	//may need to clear Bits 2, 1
 }
 // numIntsPerSec is equal to the number is the 

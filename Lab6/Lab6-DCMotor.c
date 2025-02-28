@@ -10,6 +10,7 @@
 
 #include "msp.h"
 #include "uart.h"
+#include "TimerA.h"
 
 
 /**
@@ -24,19 +25,33 @@ void delay(int del){
 	}
 }
 
+///////////////////////////////////////////////////////
+//
+// Helper function
+//
+///////////////////////////////////////////////////////
+unsigned long  CalcPeriodFromFrequency (double Hz)
+{
+	double period = 0.0;
+	period = (double)SystemCoreClock/Hz;
+	period = period;   // we divide by 2 because we want an interrupt for both the rising edge and the falling edge
+	return (unsigned long) period;
+}
+
 int main(void) {
 	// Initialize UART and PWM
 	// INSERT CODE HERE
-
+	uart0_init();
+	
 	// Print welcome over serial
-	put("Running... \n\r");
+	uart0_put("Running... \n\r");
 	
-	/* Part 1 - UNCOMMENT THIS
+	//Part 1 - UNCOMMENT THIS
 	// Generate 20% duty cycle at 10kHz
-	// INSERT CODE HERE
-	
+	TIMER_A0_PWM_Init(CalcPeriodFromFrequency(10000), 0.2, 4);
+
 	for(;;) ;  //then loop forever
-	*/
+	
 	
 	/* Part 2 - UNCOMMENT THIS
 	for(;;)  //loop forever
@@ -50,27 +65,27 @@ int main(void) {
 		// 0 to 100% duty cycle in forward direction
 		for (i=0; i<100; i++) {
 		    // INSERT CODE HERE
-			
+			TIMER_A0_PWM_DutyCycle((double)i/100.0, 4);
 			delay(10);
 		}
 		
 		// 100% down to 0% duty cycle in the forward direction
 		for (i=100; i>=0; i--) {
 		    // INSERT CODE HERE
-			
+				TIMER_A0_PWM_DutyCycle((double)i/100.0, 4);
 			delay(10);
 		}
 		
 		// 0 to 100% duty cycle in reverse direction
 		for (i=0; i<100; i++) {
-		    // INSERT CODE HERE
+			TIMER_A0_PWM_DutyCycle((double)i/100.0, 7);
 			
 			delay(10);
 		}
 		
 		// 100% down to 0% duty cycle in the reverse direction
 		for (i=100; i>=0; i--) {
-		    // INSERT CODE HERE
+			TIMER_A0_PWM_DutyCycle((double)i/100.0, 7);
 			
 			delay(10);
 		}

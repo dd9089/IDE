@@ -1,0 +1,15 @@
+--cpu=Cortex-M4.fp.sp
+".\objects\adc14.o"
+".\objects\controlpins.o"
+".\objects\cortexm.o"
+".\objects\lab5-camera.o"
+".\objects\systicktimer.o"
+".\objects\timer32.o"
+".\objects\uart.o"
+".\objects\switches.o"
+".\objects\leds.o"
+".\objects\startup_msp432p401r_uvision.o"
+".\objects\system_msp432p401r.o"
+--ro-base 0x00000000 --entry 0x00000000 --rw-base 0x20000000 --entry Reset_Handler --first __Vectors --strict --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\Listings\Lab05.map" -o .\Objects\Lab05.axf

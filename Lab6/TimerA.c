@@ -11,7 +11,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include "TimerA.h"
-#include "Uart.h"
+#include "uart.h"
 
 // Make these arrays 5 deep, since we are using indexes 1-4 for the pins
 static uint32_t DEFAULT_PERIOD_A0[5] = {0,0,0,0,0};

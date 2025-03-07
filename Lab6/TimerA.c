@@ -16,6 +16,7 @@
 // Make these arrays 5 deep, since we are using indexes 1-4 for the pins
 static uint32_t DEFAULT_PERIOD_A0[5] = {0,0,0,0,0};
 static uint32_t DEFAULT_PERIOD_A2[5] = {0,0,0,0,0};
+extern uint32_t SystemCoreClock;
 //***************************PWM_Init*******************************
 // PWM output on P2.4, P2.5, P2.6, P2.7
 // Inputs:  period of P2.4...P2.7 is number of counts before output changes state
@@ -62,14 +63,14 @@ int TIMER_A0_PWM_Init(uint16_t period, double percentDutyCycle, uint16_t pin)
 	
 	// save the period for this timer instance
 	// DEFAULT_PERIOD_A0[pin] where pin is the pin number
-	DEFAULT_PERIOD_A0[pin] = period;
+	DEFAULT_PERIOD_A0[pin] = SystemCoreClock/period;
 	// TIMER_A0->CCR[0]
-	TIMER_A0->CCR[0] = period;
+	TIMER_A0->CCR[0] = SystemCoreClock/period;
 	
 	
 
 	// TIMER_A0->CCTL[pin]
-    TIMER_A0->CCTL[pin] &= ~BIT8;
+    TIMER_A0->CCTL[pin] = BIT6;
 	
 	// set the duty cycle
 	uint16_t dutyCycle = (uint16_t) (percentDutyCycle * (double)DEFAULT_PERIOD_A0[pin]);
@@ -80,8 +81,7 @@ int TIMER_A0_PWM_Init(uint16_t period, double percentDutyCycle, uint16_t pin)
 	
 	// Timer CONTROL register
 	// TIMER_A0->CTL
-	TIMER_A0 -> CTL |= BIT9; 
-	TIMER_A0 -> CTL |= BIT4; 
+	TIMER_A0->CTL = (BIT9 | BIT4 | BIT5 | BIT1);
 	return 0;
 }
 //***************************PWM_Duty1*******************************
@@ -92,6 +92,8 @@ int TIMER_A0_PWM_Init(uint16_t period, double percentDutyCycle, uint16_t pin)
 void TIMER_A0_PWM_DutyCycle(double percentDutyCycle, uint16_t pin)
 {
    TIMER_A0->CCR[pin] = (uint16_t) (percentDutyCycle * (double)DEFAULT_PERIOD_A0[pin]);
+	 TIMER_A0->CTL = (BIT9 | BIT4 | BIT5 | BIT1);
+
 }
 
 //***************************PWM_Init*******************************

@@ -38,11 +38,13 @@ int main(void) {
 	for(;;)  //loop forever
 	{		
 		uart0_put("Turning Clockwise\n\r");
+		//0.05
 		TIMER_A2_PWM_DutyCycle(0.05, 1);
 		delay(100);
 		TIMER_A2_PWM_DutyCycle(0.075, 1);
 		delay(300);
 		uart0_put("Turning Counter Clockwise\n\r");
+		//0.1
 		TIMER_A2_PWM_DutyCycle(0.1, 1);
 		delay(100);
 		TIMER_A2_PWM_DutyCycle(0.075, 1);

@@ -443,6 +443,16 @@
               <FileName>Motors.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Motors.c</FilePath>
+            </File>
+            <File>
+              <FileName>Motors.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Motors.h</FilePath>
+            </File>
+            <File>
+              <FileName>ServoMotor.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\ServoMotor.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>2</UseCPPCompiler>
@@ -494,16 +504,6 @@
                   </Cads>
                 </FileArmAds>
               </FileOption>
-            </File>
-            <File>
-              <FileName>Motors.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Motors.h</FilePath>
-            </File>
-            <File>
-              <FileName>ServoMotor.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\ServoMotor.c</FilePath>
             </File>
             <File>
               <FileName>ServoMotor.h</FileName>

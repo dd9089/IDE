@@ -25,36 +25,62 @@ void delay(int del){
 	}
 }
 
+///////////////////////////////////////////////////////
+//
+// Helper function
+//
+///////////////////////////////////////////////////////
+unsigned long  CalcPeriodFromFrequency (double Hz)
+{
+	double period = 0.0;
+	period = (double)SystemCoreClock/Hz;
+	period = period;   // we divide by 2 because we want an interrupt for both the rising edge and the falling edge
+	return (unsigned long) period;
+}
+
 int main(void) {
 	// Initialize UART and PWM
+	// INSERT CODE HERE
 	uart0_init();
 	
 	// Print welcome over serial
 	uart0_put("Running... \n\r");
-	// Configure the GPIO Pins for Output
-	P4 -> SEL0 &= ~(BIT4 | BIT3 | BIT2 | BIT1);
-	P4 -> SEL1 &= ~(BIT4 | BIT3 | BIT2 | BIT1);
-  P4 -> DIR |= (BIT4 | BIT3 | BIT2 | BIT1);
 	
-	int forward = 1;
-	int phase = 0;
-	while ( 1 ){
-		// Turn off all coils , Set GPIO pins to 0
-		P4->OUT &= ~(BIT1 | BIT2 | BIT3 | BIT4);
-		// Set one pin high at a time
-		if ( forward ) {
-		if ( phase == 0) { P4->OUT |= BIT1; phase ++;} // A ,1 a
-		else if ( phase == 1) { P4->OUT |= BIT2; phase ++;} // B ,2 a
-		else if ( phase == 2) { P4->OUT |= BIT3; phase ++;} // C ,1 b
-		else { P4->OUT |= BIT4; phase =0;} // D ,2 b
+	// Generate 20% duty cycle at 10kHz
+	//2 DC motors (Driving)
+	TIMER_A0_PWM_Init((20000), 0.2, 1);
+	TIMER_A0_PWM_Init((20000), 0, 4);
+	TIMER_A0_PWM_Init((20000), 0.2, 2);
+	TIMER_A0_PWM_Init((20000), 0, 3);
+	
+	//Servo motor (stering)
+	TIMER_A2_PWM_Init((800), 0.075, 1);
+
+	
+	for(;;)  //loop forever
+	{
+		uint16_t dir = 0;
+		char c = 48;
+		
+		if (dir == 0){
+			uart0_put("Forward");
+			
+			TIMER_A0_PWM_DutyCycle(0.3, 1);
+			TIMER_A0_PWM_DutyCycle(0.3, 2);
+			delay(100);
+			//turn clockwise
+			TIMER_A2_PWM_DutyCycle(0.05, 1);
+			delay(50);
+			TIMER_A2_PWM_DutyCycle(0.075, 1);
 		}
-		else { // reverse
-		if ( phase == 0) { P4->OUT |= BIT4 ; phase ++;} // D ,2 b
-		else if ( phase == 1) { P4->OUT |= BIT3; phase ++;} // C ,1 b
-		else if ( phase == 2) { P4->OUT |= BIT2; phase ++;} // B ,2 a
-		else { P4->OUT |= BIT1; phase =0;} // A ,1 a
+		
+		if (dir == 1){
+			uart0_put("Reverse");
+			TIMER_A0_PWM_DutyCycle(0.3, 4);
+			TIMER_A0_PWM_DutyCycle(0.3, 3);
+			delay(10);
 		}
-		delay (5); // smaller values = faster speed
+
 	}
 	
 	return 0;

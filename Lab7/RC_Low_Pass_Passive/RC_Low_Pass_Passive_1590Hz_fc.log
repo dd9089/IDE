@@ -1,0 +1,22 @@
+Circuit: * C:\Users\DIEGO\Documents\IDE\Lab7\RC_Low_Pass_Passive\RC_Low_Pass_Passive_1590Hz_fc.asc
+
+
+find: mag(v(vout)/v(vin))=0.707 AT 504.415
+f3db: mag(v(vout))=0.707 AT 504.415
+
+
+Date: Tue Mar 25 21:47:18 2025
+Total elapsed time: 0.024 seconds.
+
+tnom = 27
+temp = 27
+method = trap
+totiter = 0
+traniter = 0
+tranpoints = 0
+accept = 0
+rejected = 0
+matrix size = 4
+fillins = 0
+solver = Normal
+

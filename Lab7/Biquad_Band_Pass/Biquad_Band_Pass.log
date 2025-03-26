@@ -1,0 +1,26 @@
+Circuit: * C:\Users\DIEGO\Documents\IDE\Lab7\Biquad_Band_Pass\Biquad_Band_Pass.asc
+
+Direct Newton iteration for .op point succeeded.
+
+
+Measurement "find" FAIL'ed
+
+Measurement "fcenter" FAIL'ed
+
+
+Date: Wed Mar 26 00:01:43 2025
+Total elapsed time: 0.034 seconds.
+
+tnom = 27
+temp = 27
+method = trap
+totiter = 3
+traniter = 0
+tranpoints = 0
+accept = 0
+rejected = 0
+matrix size = 12
+fillins = 6
+solver = Normal
+Matrix Compiler1:      44 opcodes
+Matrix Compiler2: 1.05 KB object code size

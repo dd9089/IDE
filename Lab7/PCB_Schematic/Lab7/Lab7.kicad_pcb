@@ -702,7 +702,7 @@
 		(descr "SOIC, 8 Pin (JEDEC MS-012AA, https://www.analog.com/media/en/package-pcb-resources/package/pkg_pdf/soic_narrow-r/r_8.pdf), generated with kicad-footprint-generator ipc_gullwing_generator.py")
 		(tags "SOIC SO")
 		(property "Reference" "U1"
-			(at 2.975 -3.095 90)
+			(at 2.975 -3.095 180)
 			(layer "F.SilkS")
 			(uuid "b849650f-1116-4620-bb9a-356e219b4b39")
 			(effects
@@ -1407,7 +1407,7 @@
 		(descr "Hirose DF13 through hole, DF13-05P-1.25DSA, 5 Pins per row (https://www.hirose.com/product/en/products/DF13/DF13-2P-1.25DSA%2850%29/), generated with kicad-footprint-generator")
 		(tags "connector Hirose DF13 vertical")
 		(property "Reference" "J1"
-			(at 6.25 2.5 180)
+			(at 6.25 2 180)
 			(layer "F.SilkS")
 			(uuid "cad5848b-8742-4f67-8d9e-d3aae8823ae9")
 			(effects
@@ -1926,7 +1926,7 @@
 		(descr "Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "capacitor")
 		(property "Reference" "C1"
-			(at 3.5 0.49 90)
+			(at 1.5 -0.01 90)
 			(layer "F.SilkS")
 			(uuid "77accb84-3db5-42cc-8596-14d57ebd744c")
 			(effects

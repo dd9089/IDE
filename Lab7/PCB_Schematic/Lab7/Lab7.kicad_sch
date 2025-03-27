@@ -1491,28 +1491,28 @@
 			)
 		)
 		(pin "3"
-			(uuid "ed7b5660-21fc-485f-8dda-72e7a2abc17f")
+			(uuid "ed7b5660-21fc-485f-8dda-72e7a2abc180")
 		)
 		(pin "5"
-			(uuid "2d60b8b9-2fd4-431d-ad95-bbfb839ed77b")
+			(uuid "2d60b8b9-2fd4-431d-ad95-bbfb839ed77c")
 		)
 		(pin "2"
-			(uuid "957a4237-8ac3-4be1-95a9-378d5ad1f2a7")
+			(uuid "957a4237-8ac3-4be1-95a9-378d5ad1f2a8")
 		)
 		(pin "1"
-			(uuid "c5b2172e-01a1-4bcd-aee8-1aa4662bdbd7")
+			(uuid "c5b2172e-01a1-4bcd-aee8-1aa4662bdbd8")
 		)
 		(pin "6"
-			(uuid "ea9b11cd-1634-4281-9174-89d37c9a5dbc")
+			(uuid "ea9b11cd-1634-4281-9174-89d37c9a5dbd")
 		)
 		(pin "7"
-			(uuid "5c909a87-01ec-40df-9adf-cb7c5fcc7e54")
+			(uuid "5c909a87-01ec-40df-9adf-cb7c5fcc7e55")
 		)
 		(pin "8"
-			(uuid "560bafa2-3673-4622-9355-c178b9077893")
+			(uuid "560bafa2-3673-4622-9355-c178b9077894")
 		)
 		(pin "4"
-			(uuid "60d0da06-b391-4238-b170-6cffa2233cca")
+			(uuid "60d0da06-b391-4238-b170-6cffa2233ccb")
 		)
 		(instances
 			(project ""
@@ -1874,7 +1874,7 @@
 				)
 			)
 		)
-		(property "Value" "480k"
+		(property "Value" "600k"
 			(at 194.31 102.108 90)
 			(effects
 				(font
@@ -1978,28 +1978,28 @@
 			)
 		)
 		(pin "3"
-			(uuid "ed7b5660-21fc-485f-8dda-72e7a2abc17f")
+			(uuid "ed7b5660-21fc-485f-8dda-72e7a2abc181")
 		)
 		(pin "5"
-			(uuid "2d60b8b9-2fd4-431d-ad95-bbfb839ed77b")
+			(uuid "2d60b8b9-2fd4-431d-ad95-bbfb839ed77d")
 		)
 		(pin "2"
-			(uuid "957a4237-8ac3-4be1-95a9-378d5ad1f2a7")
+			(uuid "957a4237-8ac3-4be1-95a9-378d5ad1f2a9")
 		)
 		(pin "1"
-			(uuid "c5b2172e-01a1-4bcd-aee8-1aa4662bdbd7")
+			(uuid "c5b2172e-01a1-4bcd-aee8-1aa4662bdbd9")
 		)
 		(pin "6"
-			(uuid "ea9b11cd-1634-4281-9174-89d37c9a5dbc")
+			(uuid "ea9b11cd-1634-4281-9174-89d37c9a5dbe")
 		)
 		(pin "7"
-			(uuid "5c909a87-01ec-40df-9adf-cb7c5fcc7e54")
+			(uuid "5c909a87-01ec-40df-9adf-cb7c5fcc7e56")
 		)
 		(pin "8"
-			(uuid "560bafa2-3673-4622-9355-c178b9077893")
+			(uuid "560bafa2-3673-4622-9355-c178b9077895")
 		)
 		(pin "4"
-			(uuid "60d0da06-b391-4238-b170-6cffa2233cca")
+			(uuid "60d0da06-b391-4238-b170-6cffa2233ccc")
 		)
 		(instances
 			(project ""
@@ -2171,7 +2171,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "0.68u"
+		(property "Value" "1.38u"
 			(at 168.656 93.726 0)
 			(effects
 				(font

@@ -4,8 +4,8 @@ Circuit: * C:\Users\DIEGO\Documents\IDE\Lab7\RC_Low_Pass_Passive\RC_Low_Pass_Pas
 find: mag(v(vout)/v(vin))=0.707 AT 1592.06
 
 
-Date: Thu Mar 27 22:45:47 2025
-Total elapsed time: 0.032 seconds.
+Date: Fri Mar 28 05:12:17 2025
+Total elapsed time: 0.034 seconds.
 
 tnom = 27
 temp = 27

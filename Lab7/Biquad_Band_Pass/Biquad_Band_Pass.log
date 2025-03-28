@@ -1,14 +1,9 @@
-Circuit: * C:\Users\diego\Documents\IDE\Lab7\Biquad_Band_Pass\Biquad_Band_Pass.asc
+Circuit: * C:\Users\DIEGO\Documents\IDE\Lab7\Biquad_Band_Pass\Biquad_Band_Pass.asc
 
 Direct Newton iteration for .op point succeeded.
 
-find: mag(v(vout)/v(vin))=0.707 AT 401.504
-
-Measurement "fcenter" FAIL'ed
-
-
-Date: Wed Mar 26 14:21:57 2025
-Total elapsed time: 0.113 seconds.
+Date: Thu Mar 27 23:42:41 2025
+Total elapsed time: 0.017 seconds.
 
 tnom = 27
 temp = 27

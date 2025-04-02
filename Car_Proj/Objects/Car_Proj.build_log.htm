@@ -27,29 +27,21 @@ Project File Date:  04/01/2025
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 5 (build 528)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'Target 1'
-compiling motor.c...
-TimerA.h(12): warning:  #1-D: last line of file ends without a newline
-  #endif
-motor.c: 1 warning, 0 errors
 compiling Camera.c...
 leds.h(33): warning:  #1-D: last line of file ends without a newline
   //BOOLEAN LED2_State(void);
 ServoMotor.h(7): warning:  #1-D: last line of file ends without a newline
   void servo_init(void);
-TimerA.h(12): warning:  #1-D: last line of file ends without a newline
-  #endif
-motor.h(5): warning:  #1-D: last line of file ends without a newline
-  void reverse(void);
 Camera.c(152): warning:  #177-D: variable "low_max"  was declared but never referenced
   		int low_max, low_delta = 0;
 Camera.c(153): warning:  #177-D: variable "high_max"  was declared but never referenced
   		int high_max, high_delta = 0;
 Camera.c(117): warning:  #177-D: variable "i"  was declared but never referenced
   	int i = 0;
-Camera.c: 7 warnings, 0 errors
+Camera.c: 5 warnings, 0 errors
 linking...
-Program Size: Code=6352 RO-data=356 RW-data=56 ZI-data=1264  
-".\Objects\Car_Proj.axf" - 0 Error(s), 8 Warning(s).
+Program Size: Code=6452 RO-data=356 RW-data=56 ZI-data=1264  
+".\Objects\Car_Proj.axf" - 0 Error(s), 5 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -73,11 +65,11 @@ Package Vendor: TexasInstruments
 <h2>Collection of Component Files used:</h2>
 
    * Component: TexasInstruments::Device:Startup:3.2.2
-      Source file:   Examples\BlinkLED\blinkLED.c
       Source file:   Device\Source\system_msp432p4111.c
       Include file:  Device\Include\msp_compatibility.h
       Source file:   Device\Source\startup_msp432p4111_uvision.s
       Source file:   Examples\EmptyMain\main.c
+      Source file:   Examples\BlinkLED\blinkLED.c
 
    * Component: ARM::CMSIS:CORE:5.6.0
 Build Time Elapsed:  00:00:01

@@ -115,7 +115,7 @@ int runningAverage(const uint16_t *input, uint16_t *output, int length, int wind
 int main(void)
 {	
 	int i = 0;
-	int high_thresh;
+	int high_thresh = 15000;
 	//initializations
 	DisableInterrupts();
 	uart0_init();
@@ -127,10 +127,10 @@ int main(void)
 	LED2_Init();
 	servo_init();
 	motor_init();
-	//OLED_Init();
-	//OLED_display_on();
-	//OLED_display_clear();
-	//OLED_display_on();
+//	OLED_Init();
+//	OLED_display_on();
+//	OLED_display_clear();
+//	OLED_display_on();
 
 	// remember that we double the desired frequency because we need to account for aliasing
 
@@ -145,18 +145,18 @@ int main(void)
 	EnableInterrupts();
 	uart0_put("\r\nInterrupts successfully enabled\r\n");
 	
-	high_thresh = runningAverage(line, data, sizeof(line), 5);
+	//high_thresh = runningAverage(line, data, sizeof(line), 5);
 
 	while(1)
 	{
 		int low_max, low_delta = 0;
 		int high_max, high_delta = 0;
 		runningAverage(line, data, sizeof(line), 5);
-		for (int i = 0; i < 62; i++){ //64 marks the next half
+		for (int i = 0; i < 64; i++){ //64 marks the next half
 			if (data[i] >= high_thresh){
 				low_delta++;
 			}
-			if(data[i + 62] >= high_thresh){
+			if(data[i + 64] >= high_thresh){
 				high_delta++;
 			}
 		}
@@ -166,7 +166,7 @@ int main(void)
 		uart0_put(str);
 		forward();		
 		
-		if (low_delta == high_delta){
+		if (abs(low_delta - high_delta) <= 2){
 			servo_2center();
 			uart0_put("Center\r\n");
 		}

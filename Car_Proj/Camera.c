@@ -67,7 +67,7 @@ static char str[100];
 void myDelay(void)
 {
 	volatile int j = 0;
-	for (j = 0; j < 80000; j++)
+	for (j = 0; j < 8000; j++)
 	{
 		;
 	}
@@ -179,7 +179,7 @@ int main(void)
 			uart0_put("Right\r\n");
 		}
 		// do a small delay
-		myDelay();
+		myDelay(); //change implemention to make servo respond faster
 	}
 	
 }

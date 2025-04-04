@@ -114,13 +114,18 @@ int runningAverage(const uint16_t *input, uint16_t *output, int length, int wind
 /////////////////////////////////////////////////////
 int main(void)
 {	
+  //bluetooth print trackers
+  BOOLEAN L = 0;
+  BOOLEAN C = 0;
+  BOOLEAN R = 0;
 	int i = 0;
 	int high_thresh = 15000;
 	//initializations
 	DisableInterrupts();
 	uart0_init();
+  uart2_init();
 	uart0_put("\r\nLab5 CAMERA demo\r\n");
-
+  uart2_put("BLuetooth test");
 	
 	uart0_put("\r\nINIT LEDs\r\n");
 	LED1_Init();
@@ -169,15 +174,35 @@ int main(void)
 		if (abs(low_delta - high_delta) <= 2){
 			servo_2center();
 			uart0_put("Center\r\n");
+      L = 0;
+      R = 0;
+      C = 1;
 		}
 		else if(low_delta > high_delta){
 			servo_2left();
 			uart0_put("Left\r\n");
+      L = 1;
+      R = 0;
+      C = 0;
 		}
 		else{
 			servo_2right();
 			uart0_put("Right\r\n");
+      L = 0;
+      R = 1;
+      C = 0;
 		}
+    sprintf(str,"Low delta: %i, High Delta: %i %i\n\r", low_delta, high_delta, high_thresh);
+    if (L){
+      uart2_put("Left\r\n");
+    }
+    else if (R) {
+      uart2_put("Right\r\n");
+    }
+    else {
+      uart2_put("Center\r\n");
+    }
+
 		// do a small delay
 		myDelay(); //change implemention to make servo respond faster
 	}

@@ -5,7 +5,7 @@
 <h2>Tool Versions:</h2>
 IDE-Version: µVision V5.24.2.0
 Copyright (C) 2017 ARM Ltd and ARM Germany GmbH. All rights reserved.
-License Information: Rick Tolleson, Rochester Institute of Technology, LIC=----
+License Information: D Peon, RIT, LIC=----
  
 Tool Versions:
 Toolchain:       MDK-Lite  Version: 5.24.1
@@ -21,46 +21,16 @@ Target DLL:      CMSIS_AGDI.dll V1.28.3.0
 Dialog DLL:      TCM.DLL V1.32.0.0
  
 <h2>Project:</h2>
-D:\IDE Lab\IDE\Car_Proj\Car_Proj.uvprojx
-Project File Date:  04/04/2025
+C:\Users\diego\Documents\IDE\Car_Proj\Car_Proj.uvprojx
+Project File Date:  04/06/2025
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 5 (build 528)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
-Rebuild target 'Target 1'
-assembling startup_msp432p4111_uvision.s...
-compiling CortexM.c...
-compiling ControlPins.c...
-Leds.h(33): warning:  #1-D: last line of file ends without a newline
-  //BOOLEAN LED2_State(void);
-ControlPins.c: 1 warning, 0 errors
-compiling ADC14.c...
-compiling system_msp432p4111.c...
-compiling i2c.c...
-compiling Timer32.c...
-compiling SysTickTimer.c...
-compiling uart.c...
+Build target 'Target 1'
 compiling ServoMotor.c...
-compiling TimerA.c...
-compiling motor.c...
-compiling leds.c...
-compiling Camera.c...
-leds.h(33): warning:  #1-D: last line of file ends without a newline
-  //BOOLEAN LED2_State(void);
-ServoMotor.h(7): warning:  #1-D: last line of file ends without a newline
-  void servo_init(void);
-Camera.c(157): warning:  #177-D: variable "low_max"  was declared but never referenced
-  		int low_max, low_delta = 0;
-Camera.c(158): warning:  #177-D: variable "high_max"  was declared but never referenced
-  		int high_max, high_delta = 0;
-Camera.c(119): warning:  #550-D: variable "C"  was set but never used
-    BOOLEAN C = 0;
-Camera.c(121): warning:  #177-D: variable "i"  was declared but never referenced
-  	int i = 0;
-Camera.c: 6 warnings, 0 errors
-compiling oled.c...
 linking...
-Program Size: Code=6800 RO-data=356 RW-data=56 ZI-data=1264  
-".\Objects\Car_Proj.axf" - 0 Error(s), 7 Warning(s).
+Program Size: Code=7404 RO-data=356 RW-data=56 ZI-data=1264  
+".\Objects\Car_Proj.axf" - 0 Error(s), 0 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -84,14 +54,14 @@ Package Vendor: TexasInstruments
 <h2>Collection of Component Files used:</h2>
 
    * Component: TexasInstruments::Device:Startup:3.2.2
-      Source file:   Examples\BlinkLED\blinkLED.c
-      Include file:  Device\Include\msp_compatibility.h
-      Source file:   Examples\EmptyMain\main.c
-      Source file:   Device\Source\system_msp432p4111.c
       Source file:   Device\Source\startup_msp432p4111_uvision.s
+      Source file:   Device\Source\system_msp432p4111.c
+      Include file:  Device\Include\msp_compatibility.h
+      Source file:   Examples\BlinkLED\blinkLED.c
+      Source file:   Examples\EmptyMain\main.c
 
    * Component: ARM::CMSIS:CORE:5.6.0
-Build Time Elapsed:  00:00:23
+Build Time Elapsed:  00:00:00
 </pre>
 </body>
 </html>

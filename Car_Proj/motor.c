@@ -13,13 +13,6 @@
 #include "TimerA.h"
 
 //2.5 and 2.7 in car tester
-void forward(void){
-
-		TIMER_A0_PWM_DutyCycle(0.25, 2); //2.5 left motor
-		TIMER_A0_PWM_DutyCycle(0.25, 4); //2.7 right motor
-
-}
-
 void reverse(void){
 	TIMER_A0_PWM_DutyCycle(0.4, 1);
 	TIMER_A0_PWM_DutyCycle(0.4, 3);
@@ -35,8 +28,7 @@ void motor_init(void){
 	// make built-in motor out	 
 	P3 -> DIR |= BIT6;
 	P3 -> DIR |= BIT7;
-
-	// turn on LED
+	
 	P3 -> OUT |= BIT6;
 	P3 -> OUT |= BIT7;
 
@@ -44,4 +36,19 @@ void motor_init(void){
 	TIMER_A0_PWM_Init((20000), 0, 4);
 	TIMER_A0_PWM_Init((20000), 0, 2);
 	TIMER_A0_PWM_Init((20000), 0, 3);
+}
+
+void Toggle_Motor(BOOLEAN State){
+	if (State){
+		TIMER_A0_PWM_DutyCycle(0, 2); //2.5 left motor
+		TIMER_A0_PWM_DutyCycle(0, 4); //2.7 right motor
+		uart2_put("WHY1");
+
+	}
+	else{
+		TIMER_A0_PWM_DutyCycle(0.27, 2); //2.5 left motor
+		TIMER_A0_PWM_DutyCycle(0.27, 4); //2.7 right motor
+				uart2_put("WHY2");
+
+	}
 }

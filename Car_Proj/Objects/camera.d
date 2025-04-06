@@ -22,3 +22,4 @@
 .\objects\camera.o: TimerA.h
 .\objects\camera.o: motor.h
 .\objects\camera.o: oled.h
+.\objects\camera.o: switches.h

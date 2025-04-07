@@ -46,8 +46,8 @@ void Toggle_Motor(BOOLEAN State){
 
 	}
 	else{
-		TIMER_A0_PWM_DutyCycle(0.27, 2); //2.5 left motor
-		TIMER_A0_PWM_DutyCycle(0.27, 4); //2.7 right motor
+		TIMER_A0_PWM_DutyCycle(0.35, 2); //2.5 left motor
+		TIMER_A0_PWM_DutyCycle(0.35, 4); //2.7 right motor
 				uart2_put("WHY2");
 
 	}

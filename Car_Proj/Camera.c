@@ -51,7 +51,6 @@ static char str[100];
 
 BOOLEAN SW1 = FALSE;
 BOOLEAN SW2 = FALSE;
-
 // ADC_In() gets the latest value from the ADC
 // ADC will be P4.7 A6
 

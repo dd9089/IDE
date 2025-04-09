@@ -94,17 +94,17 @@ int runningAverage(const uint16_t *input, uint16_t *output, int length, int wind
 	int min = input[0];
 	length -= 4;
 	for (int i = 4; i <= length - window; i++) {
-        double sum = 0.0;
-        for (int j = 0; j < window; j++) {
-            sum += input[i + j];
-        }
+//        double sum = 0.0;
+//        for (int j = 0; j < window; j++) {
+//            sum += input[i + j];
+//        }
 				if (input[i] > max){
 					max = input[i];
 				}
 				if (input[i] < min){
 					min = input[i];
 				}
-        output[i] = sum / window;
+//        output[i] = sum / window;
     }
 	return ((max + min) / 2);
 }
@@ -231,10 +231,9 @@ void PORT1_IRQHandler(void)
 int main(void)
 {	
   //bluetooth print trackers
-  BOOLEAN L = 0;
-  BOOLEAN C = 0;
-  BOOLEAN R = 0;
-	int i = 0;
+//  BOOLEAN L = 0;
+//  BOOLEAN C = 0;
+//  BOOLEAN R = 0;
 	int high_thresh = 0;
 	//initializations
 	DisableInterrupts();
@@ -276,44 +275,71 @@ int main(void)
 
 	while(1)
 	{
-		int low_max, low_delta = 0;
-		int high_max, high_delta = 0;
-		runningAverage(line, data, sizeof(line), 5);
-		for (int i = 0; i < 64; i++){ //64 marks the next half
+		int error, num_white, middle = 0;
+		int pos[128];
+//		int low_max, low_delta = 0;
+//		int high_max, high_delta = 0;
+//		runningAverage(line, data, sizeof(line), 5);
+//		for (int i = 0; i < 64; i++){ //64 marks the next half
+//			if (data[i] >= high_thresh){
+//				low_delta++;
+//			}
+//			if(data[i + 64] >= high_thresh){
+//				high_delta++;
+//			}
+//		}
+		for (int i=0; i < 128; i++){
 			if (data[i] >= high_thresh){
-				low_delta++;
-			}
-			if(data[i + 64] >= high_thresh){
-				high_delta++;
+				pos[num_white] = i;
+				num_white += 1;
 			}
 		}
+		
+		middle = num_white / 2;
+		error = 64 - pos[middle];
+		if (error < -10){
+			servo_2right(); //sharper turn right 0.05
+		}
+		else if (error < -5){
+			servo_2right(); //less sharp turn to right 0.06
+		}
+		else if (error <= 4){
+			servo_2center(); //stay in path 0.075
+		}
+		else if (error > 5){
+			servo_2left(); //slight turn left 0.09
+		}
+		else{
+			servo_2left(); //sharper turn left 0.1
+		}
+		
 		
 		//OLED_DisplayCameraData(data);
 
-		sprintf(str,"%i %i %i\n\r", low_delta, high_delta, high_thresh);
-		uart0_put(str);
-		
-		if (abs(low_delta - high_delta) <= 2){
-			servo_2center();
-			uart0_put("Center\r\n");
-      L = 0;
-      R = 0;
-      C = 1;
-		}
-		else if(low_delta > high_delta){
-			servo_2left();
-			uart0_put("Left\r\n");
-      L = 1;
-      R = 0;
-      C = 0;
-		}
-		else{
-			servo_2right();
-			uart0_put("Right\r\n");
-      L = 0;
-      R = 1;
-      C = 0;
-		}
+//		sprintf(str,"%i %i %i\n\r", low_delta, high_delta, high_thresh);
+//		uart0_put(str);
+//		
+//		if (abs(low_delta - high_delta) <= 2){
+//			servo_2center();
+//			uart0_put("Center\r\n");
+//      L = 0;
+//      R = 0;
+//      C = 1;
+//		}
+//		else if(low_delta > high_delta){
+//			servo_2left();
+//			uart0_put("Left\r\n");
+//      L = 1;
+//      R = 0;
+//      C = 0;
+//		}
+//		else{
+//			servo_2right();
+//			uart0_put("Right\r\n");
+//      L = 0;
+//      R = 1;
+//      C = 0;
+//		}
 
 		// do a small delay
 		myDelay(); //change implemention to make servo respond faster

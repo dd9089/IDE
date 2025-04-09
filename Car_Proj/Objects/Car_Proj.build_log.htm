@@ -3,56 +3,49 @@
 <pre>
 <h1>µVision Build Log</h1>
 <h2>Tool Versions:</h2>
-IDE-Version: µVision V5.24.2.0
-Copyright (C) 2017 ARM Ltd and ARM Germany GmbH. All rights reserved.
-License Information: D Peon, RIT, LIC=----
+IDE-Version: µVision V5.31.0.0
+Copyright (C) 2020 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: D D, RIT, LIC=----
  
 Tool Versions:
-Toolchain:       MDK-Lite  Version: 5.24.1
+Toolchain:       MDK-Lite  Version: 5.31.0.0
 Toolchain Path:  C:\Keil_v5\ARM\ARMCC\Bin
-C Compiler:      Armcc.exe V5.06 update 5 (build 528)
-Assembler:       Armasm.exe V5.06 update 5 (build 528)
-Linker/Locator:  ArmLink.exe V5.06 update 5 (build 528)
-Library Manager: ArmAr.exe V5.06 update 5 (build 528)
-Hex Converter:   FromElf.exe V5.06 update 5 (build 528)
-CPU DLL:         SARMCM3.DLL V5.24.1
-Dialog DLL:      DCM.DLL V1.16.0.0
-Target DLL:      CMSIS_AGDI.dll V1.28.3.0
-Dialog DLL:      TCM.DLL V1.32.0.0
+C Compiler:      Armcc.exe V5.06 update 6 (build 750)
+Assembler:       Armasm.exe V5.06 update 6 (build 750)
+Linker/Locator:  ArmLink.exe V5.06 update 6 (build 750)
+Library Manager: ArmAr.exe V5.06 update 6 (build 750)
+Hex Converter:   FromElf.exe V5.06 update 6 (build 750)
+CPU DLL:         SARMCM3.DLL V5.31.0.0
+Dialog DLL:      DCM.DLL V1.17.3.0
+Target DLL:      CMSIS_AGDI.dll V1.32.6.0
+Dialog DLL:      TCM.DLL V1.46.0.0
  
 <h2>Project:</h2>
-C:\Users\diego\Documents\IDE\Car_Proj\Car_Proj.uvprojx
-Project File Date:  04/07/2025
+C:\Users\DIEGO\Documents\IDE\Car_Proj\Car_Proj.uvprojx
+Project File Date:  04/09/2025
 
 <h2>Output:</h2>
-*** Using Compiler 'V5.06 update 5 (build 528)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
-Build target 'Target 1'
+*** Using Compiler 'V5.06 update 6 (build 750)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
+Rebuild target 'Target 1'
+compiling CortexM.c...
+compiling ControlPins.c...
+compiling ServoMotor.c...
+compiling Timer32.c...
 compiling motor.c...
+compiling SysTickTimer.c...
+compiling ADC14.c...
+compiling leds.c...
+compiling TimerA.c...
+compiling uart.c...
+assembling startup_msp432p4111_uvision.s...
 compiling Camera.c...
-leds.h(33): warning:  #1-D: last line of file ends without a newline
-  //BOOLEAN LED2_State(void);
-ServoMotor.h(7): warning:  #1-D: last line of file ends without a newline
-  void servo_init(void);
-motor.h(5): warning:  #1-D: last line of file ends without a newline
-  void Toggle_Motor(BOOLEAN State);
-switches.h(15): warning:  #1-D: last line of file ends without a newline
-  BOOLEAN Switch2_Pressed(void);
-Camera.c(279): warning:  #177-D: variable "low_max"  was declared but never referenced
-  		int low_max, low_delta = 0;
-Camera.c(280): warning:  #177-D: variable "high_max"  was declared but never referenced
-  		int high_max, high_delta = 0;
-Camera.c(234): warning:  #550-D: variable "L"  was set but never used
-    BOOLEAN L = 0;
-Camera.c(235): warning:  #550-D: variable "C"  was set but never used
-    BOOLEAN C = 0;
-Camera.c(236): warning:  #550-D: variable "R"  was set but never used
-    BOOLEAN R = 0;
-Camera.c(237): warning:  #177-D: variable "i"  was declared but never referenced
-  	int i = 0;
-Camera.c: 10 warnings, 0 errors
+compiling i2c.c...
+compiling switches.c...
+compiling oled.c...
+compiling system_msp432p4111.c...
 linking...
-Program Size: Code=7404 RO-data=356 RW-data=56 ZI-data=1264  
-".\Objects\Car_Proj.axf" - 0 Error(s), 10 Warning(s).
+Program Size: Code=6340 RO-data=356 RW-data=56 ZI-data=1264  
+".\Objects\Car_Proj.axf" - 0 Error(s), 0 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -70,20 +63,20 @@ Package Vendor: TexasInstruments
 
 <h2>Collection of Component include folders:</h2>
   .\RTE\_Target_1
-  C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\CMSIS\Core\Include
-  C:\Keil_v5\ARM\PACK\TexasInstruments\MSP432P4xx_DFP\3.2.6\Device\Include
+  C:\Users\DIEGO\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include
+  C:\Users\DIEGO\AppData\Local\Arm\Packs\TexasInstruments\MSP432P4xx_DFP\3.2.6\Device\Include
 
 <h2>Collection of Component Files used:</h2>
 
-   * Component: TexasInstruments::Device:Startup:3.2.2
-      Source file:   Examples\BlinkLED\blinkLED.c
-      Source file:   Device\Source\startup_msp432p4111_uvision.s
-      Source file:   Examples\EmptyMain\main.c
-      Include file:  Device\Include\msp_compatibility.h
-      Source file:   Device\Source\system_msp432p4111.c
-
    * Component: ARM::CMSIS:CORE:5.6.0
-Build Time Elapsed:  00:00:03
+
+   * Component: TexasInstruments::Device:Startup:3.2.2
+      Source file:   Device\Source\startup_msp432p4111_uvision.s
+      Include file:  Device\Include\msp_compatibility.h
+      Source file:   Examples\EmptyMain\main.c
+      Source file:   Examples\BlinkLED\blinkLED.c
+      Source file:   Device\Source\system_msp432p4111.c
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>

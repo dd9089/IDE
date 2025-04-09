@@ -3,7 +3,7 @@
 /*  Noah Bhuiya
     Diego Diaz
     2025
-    Servo Motor functionality??
+    Servo Motor functionality for steering
  */
 #include "msp.h"
 #include "uart.h"

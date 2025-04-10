@@ -19,12 +19,12 @@ void servo_init(void){
 	TIMER_A2_PWM_Init((800), 0.075, 1); //maybe change this to make servo respond faster?
 }
 
-void servo_2right(void){
-	TIMER_A2_PWM_DutyCycle(0.05, 1);
+void servo_2right(int duty){
+	TIMER_A2_PWM_DutyCycle(duty / 100.0, 1);
 }
 
-void servo_2left(void){
-	TIMER_A2_PWM_DutyCycle(0.1, 1);
+void servo_2left(int duty){
+	TIMER_A2_PWM_DutyCycle(duty / 100.0, 1);
 }
 
 void servo_2center(void){

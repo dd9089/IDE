@@ -90,10 +90,9 @@ void INIT_Camera(void)
 }
 
 int runningAverage(const uint16_t *input, uint16_t *output, int length, int window) {
-  int max = 0;
-	int min = input[0];
-	length -= 4;
-	for (int i = 4; i <= length - window; i++) {
+  uint16_t max = 0;
+	uint16_t min = input[0];
+	for (int i = 0; i < length; i++) {
 //        double sum = 0.0;
 //        for (int j = 0; j < window; j++) {
 //            sum += input[i + j];
@@ -101,12 +100,11 @@ int runningAverage(const uint16_t *input, uint16_t *output, int length, int wind
 				if (input[i] > max){
 					max = input[i];
 				}
-				if (input[i] < min){
-					min = input[i];
-				}
 //        output[i] = sum / window;
     }
-	return ((max + min) / 2);
+		sprintf(str, "max: %i min: %i\n\r", max, min);
+		uart2_put(str);
+	return (max * 0.9);
 }
 
 //
@@ -205,6 +203,7 @@ void PORT1_IRQHandler(void)
 		//uart0_put("\r\nIRQ Handler SW 1\r\n");
     P1 -> IFG &= ~BIT1;  
 		SW1 = !SW1; //toggle switch 1/LED 1 state
+		uart0_put("why");
 		Toggle_Motor(SW1);
 	}
 	// Now check to see if it came from Switch2 ?
@@ -234,7 +233,7 @@ int main(void)
 //  BOOLEAN L = 0;
 //  BOOLEAN C = 0;
 //  BOOLEAN R = 0;
-	int high_thresh = 0;
+	uint16_t high_thresh = 0;
 	//initializations
 	DisableInterrupts();
 	uart0_init();
@@ -251,10 +250,10 @@ int main(void)
 	Switch2_Init();
 	Switch1_Interrupt_Init();
 	Switch2_Interrupt_Init();
-//	OLED_Init();
-//	OLED_display_on();
-//	OLED_display_clear();
-//	OLED_display_on();
+	OLED_Init();
+	OLED_display_on();
+	OLED_display_clear();
+	OLED_display_on();
 
 	// remember that we double the desired frequency because we need to account for aliasing
 
@@ -270,16 +269,13 @@ int main(void)
 	uart0_put("\r\nInterrupts successfully enabled\r\n");
 	
 	high_thresh = runningAverage(line, data, 128, 5);
-	sprintf(str,"%i\n\r", high_thresh);
-	uart2_put(str);
-
 	while(1)
 	{
-		int error, num_white, middle = 0;
-		int pos[128];
+		int error = 0, num_white = 0, middle = 0;
+		uint16_t pos[128];
 //		int low_max, low_delta = 0;
 //		int high_max, high_delta = 0;
-//		runningAverage(line, data, sizeof(line), 5);
+		runningAverage(line, data, 128, 5);
 //		for (int i = 0; i < 64; i++){ //64 marks the next half
 //			if (data[i] >= high_thresh){
 //				low_delta++;
@@ -288,33 +284,45 @@ int main(void)
 //				high_delta++;
 //			}
 //		}
+
 		for (int i=0; i < 128; i++){
-			if (data[i] >= high_thresh){
+			if (line[i] >= high_thresh){
 				pos[num_white] = i;
 				num_white += 1;
 			}
+			
 		}
-		
+		if (num_white == 0){
+			Toggle_Motor(TRUE);
+			uart2_put("num_white=0"); //this will tell us if it doesn't see any white
+		}
 		middle = num_white / 2;
 		error = 64 - pos[middle];
-		if (error < -10){
-			servo_2right(); //sharper turn right 0.05
+				sprintf(str,"\n%i\n\r", error);
+				uart2_put(str);
+
+		if (error < -3){
+			servo_2right(4); //sharper turn right 0.05
+			uart2_put("Hard right\r\n");
 		}
-		else if (error < -5){
-			servo_2right(); //less sharp turn to right 0.06
+		else if (error < 0){
+			servo_2right(6); //less sharp turn to right 0.06
+			uart2_put("Soft right\r\n");
 		}
 		else if (error <= 4){
 			servo_2center(); //stay in path 0.075
 		}
-		else if (error > 5){
-			servo_2left(); //slight turn left 0.09
+		else if (error > 10){
+			servo_2left(10); //slight turn left 0.09
+			uart2_put("Hard left\r\n");
 		}
 		else{
-			servo_2left(); //sharper turn left 0.1
+			servo_2left(10); //sharper turn left 0.1
+			uart2_put("Soft left\r\n");
 		}
 		
 		
-		//OLED_DisplayCameraData(data);
+		OLED_DisplayCameraData(line);
 
 //		sprintf(str,"%i %i %i\n\r", low_delta, high_delta, high_thresh);
 //		uart0_put(str);

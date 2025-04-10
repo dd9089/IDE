@@ -1,4 +1,6 @@
 .\objects\motor.o: motor.c
+.\objects\motor.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\motor.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\motor.o: C:\Keil_v5\ARM\PACK\TexasInstruments\MSP432P4xx_DFP\3.2.6\Device\Include\msp.h
 .\objects\motor.o: C:\Keil_v5\ARM\PACK\TexasInstruments\MSP432P4xx_DFP\3.2.6\Device\Include\msp432p4111.h
 .\objects\motor.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h

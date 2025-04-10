@@ -8,9 +8,15 @@
  * 2021
  */
 
+#include <stdio.h>
+#include <stdlib.h>
+
 #include "msp.h"
 #include "uart.h"
 #include "TimerA.h"
+
+static char str[100];
+
 
 //2.5 and 2.7 in car tester
 void reverse(void){
@@ -39,12 +45,15 @@ void motor_init(void){
 }
 
 void Toggle_Motor(BOOLEAN State){
-	if (State){
+	sprintf(str, "State: %d \n\r", State); 
+	uart2_put(str);
+	if (!State){
+		uart2_put("WHY");
 		TIMER_A0_PWM_DutyCycle(0, 2); //2.5 left motor
 		TIMER_A0_PWM_DutyCycle(0, 4); //2.7 right motor
 	}
 	else{
-		TIMER_A0_PWM_DutyCycle(0.30, 2); //2.5 left motor
-		TIMER_A0_PWM_DutyCycle(0.30, 4); //2.7 right motor
+		TIMER_A0_PWM_DutyCycle(0.3, 2); //2.5 left motor
+		TIMER_A0_PWM_DutyCycle(0.3, 4); //2.7 right motor
 	}
 }

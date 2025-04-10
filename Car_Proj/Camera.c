@@ -102,9 +102,9 @@ int runningAverage(const uint16_t *input, uint16_t *output, int length, int wind
 				}
 //        output[i] = sum / window;
     }
-		sprintf(str, "max: %i min: %i\n\r", max, min);
-		uart2_put(str);
-	return (max * 0.9);
+//		sprintf(str, "max: %i min: %i\n\r", max, min);
+//		uart2_put(str);
+	return (max * 0.95);
 }
 
 //
@@ -201,9 +201,8 @@ void PORT1_IRQHandler(void)
 		// acknowledge P1.1 is pressed, by setting BIT1 to zero - remember P1.1 is switch 1
 		// clear flag, acknowledge
 		//uart0_put("\r\nIRQ Handler SW 1\r\n");
-    P1 -> IFG &= ~BIT1;  
-		SW1 = !SW1; //toggle switch 1/LED 1 state
-		uart0_put("why");
+    P1 -> IFG &= ~BIT1;
+		SW1 = !SW1;
 		Toggle_Motor(SW1);
 	}
 	// Now check to see if it came from Switch2 ?
@@ -250,10 +249,10 @@ int main(void)
 	Switch2_Init();
 	Switch1_Interrupt_Init();
 	Switch2_Interrupt_Init();
-	OLED_Init();
-	OLED_display_on();
-	OLED_display_clear();
-	OLED_display_on();
+//	OLED_Init();
+//	OLED_display_on();
+//	OLED_display_clear();
+//	OLED_display_on();
 
 	// remember that we double the desired frequency because we need to account for aliasing
 
@@ -293,36 +292,54 @@ int main(void)
 			
 		}
 		if (num_white == 0){
-			Toggle_Motor(TRUE);
+			SW1 = FALSE;
+			Toggle_Motor(SW1);
 			uart2_put("num_white=0"); //this will tell us if it doesn't see any white
 		}
 		middle = num_white / 2;
 		error = 64 - pos[middle];
-				sprintf(str,"\n%i\n\r", error);
-				uart2_put(str);
+//				sprintf(str,"\n%i\n\r", error);
+//				uart2_put(str);
+		if (SW1){
+				if (error < -7) {
+						servo_2right(4); // 0.05
+						TIMER_A0_PWM_DutyCycle(0.38, 2); // left motor faster
+						TIMER_A0_PWM_DutyCycle(0.22, 4); // right motor slower
+				}
+				else if (error < -4) {
+						servo_2right(5); // 0.06
+						TIMER_A0_PWM_DutyCycle(0.34, 2);
+						TIMER_A0_PWM_DutyCycle(0.26, 4);
+				}
+				else if (error < -2) {
+						servo_2right(6); // 0.065
+						TIMER_A0_PWM_DutyCycle(0.31, 2);
+						TIMER_A0_PWM_DutyCycle(0.29, 4);
+				}
+				else if (error <= 2) {
+						servo_2center(); // 0.075
+						TIMER_A0_PWM_DutyCycle(0.3, 2);
+						TIMER_A0_PWM_DutyCycle(0.3, 4);
+				}
+				else if (error <= 4) {
+						servo_2left(8); // 0.085
+						TIMER_A0_PWM_DutyCycle(0.29, 2);
+						TIMER_A0_PWM_DutyCycle(0.31, 4);
+				}
+				else if (error <= 7) {
+						servo_2left(10); // 0.09
+						TIMER_A0_PWM_DutyCycle(0.26, 2);
+						TIMER_A0_PWM_DutyCycle(0.34, 4);
+				}
+				else {
+						servo_2left(13); // 0.1
+						TIMER_A0_PWM_DutyCycle(0.22, 2); // left slower
+						TIMER_A0_PWM_DutyCycle(0.38, 4); // right faster
+				}
 
-		if (error < -3){
-			servo_2right(4); //sharper turn right 0.05
-			uart2_put("Hard right\r\n");
-		}
-		else if (error < 0){
-			servo_2right(6); //less sharp turn to right 0.06
-			uart2_put("Soft right\r\n");
-		}
-		else if (error <= 4){
-			servo_2center(); //stay in path 0.075
-		}
-		else if (error > 10){
-			servo_2left(10); //slight turn left 0.09
-			uart2_put("Hard left\r\n");
-		}
-		else{
-			servo_2left(10); //sharper turn left 0.1
-			uart2_put("Soft left\r\n");
 		}
 		
-		
-		OLED_DisplayCameraData(line);
+//		OLED_DisplayCameraData(line);
 
 //		sprintf(str,"%i %i %i\n\r", low_delta, high_delta, high_thresh);
 //		uart0_put(str);

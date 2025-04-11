@@ -300,74 +300,59 @@ int main(void)
 		error = 64 - pos[middle];
 //				sprintf(str,"\n%i\n\r", error);
 //				uart2_put(str);
-		if (SW1){
-				if (error < -7) {
-						servo_2right(4); // 0.05
-						TIMER_A0_PWM_DutyCycle(0.38, 2); // left motor faster
-						TIMER_A0_PWM_DutyCycle(0.22, 4); // right motor slower
-				}
-				else if (error < -4) {
-						servo_2right(5); // 0.06
-						TIMER_A0_PWM_DutyCycle(0.34, 2);
-						TIMER_A0_PWM_DutyCycle(0.26, 4);
-				}
-				else if (error < -2) {
-						servo_2right(6); // 0.065
-						TIMER_A0_PWM_DutyCycle(0.31, 2);
-						TIMER_A0_PWM_DutyCycle(0.29, 4);
-				}
-				else if (error <= 2) {
-						servo_2center(); // 0.075
-						TIMER_A0_PWM_DutyCycle(0.3, 2);
-						TIMER_A0_PWM_DutyCycle(0.3, 4);
-				}
-				else if (error <= 4) {
-						servo_2left(8); // 0.085
-						TIMER_A0_PWM_DutyCycle(0.29, 2);
-						TIMER_A0_PWM_DutyCycle(0.31, 4);
-				}
-				else if (error <= 7) {
-						servo_2left(10); // 0.09
-						TIMER_A0_PWM_DutyCycle(0.26, 2);
-						TIMER_A0_PWM_DutyCycle(0.34, 4);
-				}
-				else {
-						servo_2left(13); // 0.1
-						TIMER_A0_PWM_DutyCycle(0.22, 2); // left slower
-						TIMER_A0_PWM_DutyCycle(0.38, 4); // right faster
-				}
+		static float Kp = 0.0025, Ki = 0.0005, Kd = 0.001;
+		static float errInt = 0, errOld = 0;
+		float dt = 0.01; // approx loop time
 
+		if (SW1) {
+				float err = (float)error;
+				errInt += err * dt;
+				if (errInt > 15.0f) errInt = 15.0f;
+				if (errInt < -15.0f) errInt = -15.0f;
+
+				float derr = (err - errOld) / dt;
+				float control = Kp * err + Ki * errInt + Kd * derr;
+
+				float pwm = 0.075 + control;  // 0.075 is center
+
+				servo_2right(pwm);  // update PWM output
+				errOld = err;
+
+				// drive motors straight
+				TIMER_A0_PWM_DutyCycle(0.3, 2);
+				TIMER_A0_PWM_DutyCycle(0.3, 4);
 		}
-		
-//		OLED_DisplayCameraData(line);
 
-//		sprintf(str,"%i %i %i\n\r", low_delta, high_delta, high_thresh);
-//		uart0_put(str);
-//		
-//		if (abs(low_delta - high_delta) <= 2){
-//			servo_2center();
-//			uart0_put("Center\r\n");
-//      L = 0;
-//      R = 0;
-//      C = 1;
-//		}
-//		else if(low_delta > high_delta){
-//			servo_2left();
-//			uart0_put("Left\r\n");
-//      L = 1;
-//      R = 0;
-//      C = 0;
-//		}
-//		else{
-//			servo_2right();
-//			uart0_put("Right\r\n");
-//      L = 0;
-//      R = 1;
-//      C = 0;
-//		}
+				
+		//		OLED_DisplayCameraData(line);
 
-		// do a small delay
-		myDelay(); //change implemention to make servo respond faster
-	}
-	
-}
+		//		sprintf(str,"%i %i %i\n\r", low_delta, high_delta, high_thresh);
+		//		uart0_put(str);
+		//		
+		//		if (abs(low_delta - high_delta) <= 2){
+		//			servo_2center();
+		//			uart0_put("Center\r\n");
+		//      L = 0;
+		//      R = 0;
+		//      C = 1;
+		//		}
+		//		else if(low_delta > high_delta){
+		//			servo_2left();
+		//			uart0_put("Left\r\n");
+		//      L = 1;
+		//      R = 0;
+		//      C = 0;
+		//		}
+		//		else{
+		//			servo_2right();
+		//			uart0_put("Right\r\n");
+		//      L = 0;
+		//      R = 1;
+		//      C = 0;
+		//		}
+
+				// do a small delay
+				myDelay(); //change implemention to make servo respond faster
+			}
+			
+		}

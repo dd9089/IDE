@@ -91,7 +91,6 @@ void INIT_Camera(void)
 
 int runningAverage(const uint16_t *input, uint16_t *output, int length, int window) {
   uint16_t max = 0;
-	uint16_t min = input[0];
 	for (int i = 0; i < length; i++) {
 //        double sum = 0.0;
 //        for (int j = 0; j < window; j++) {
@@ -313,9 +312,9 @@ int main(void)
 				float derr = (err - errOld) / dt;
 				float control = Kp * err + Ki * errInt + Kd * derr;
 
-				float pwm = 0.075 + control;  // 0.075 is center
+				float pwm = 0.075f + control;  // 0.075 is center
 
-				servo_2right(pwm);  // update PWM output
+				servo_turn(pwm);  // update PWM output
 				errOld = err;
 
 				// drive motors straight

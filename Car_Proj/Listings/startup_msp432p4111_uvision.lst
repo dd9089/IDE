@@ -77,26 +77,26 @@ ARM Macro Assembler    Page 2
    40 00000000         ;   <o> Stack Size (in Bytes) <0x0-0xFFFFFFFF:8>
    41 00000000         ; </h>
    42 00000000         
-   43 00000000 00000200 
+   43 00000000 00000400 
                        Stack_Size
-                               EQU              0x00000200
+                               EQU              0x00000400
    44 00000000         
    45 00000000                 AREA             STACK, NOINIT, READWRITE, ALIGN
 =3
    46 00000000         Stack_Mem
                                SPACE            Stack_Size
-   47 00000200         __initial_sp
-   48 00000200         
-   49 00000200         
-   50 00000200         ; <h> Heap Configuration
-   51 00000200         ;   <o>  Heap Size (in Bytes) <0x0-0xFFFFFFFF:8>
-   52 00000200         ; </h>
-   53 00000200         
-   54 00000200 00000000 
+   47 00000400         __initial_sp
+   48 00000400         
+   49 00000400         
+   50 00000400         ; <h> Heap Configuration
+   51 00000400         ;   <o>  Heap Size (in Bytes) <0x0-0xFFFFFFFF:8>
+   52 00000400         ; </h>
+   53 00000400         
+   54 00000400 00000000 
                        Heap_Size
                                EQU              0x00000000
-   55 00000200         
-   56 00000200                 AREA             HEAP, NOINIT, READWRITE, ALIGN=
+   55 00000400         
+   56 00000400                 AREA             HEAP, NOINIT, READWRITE, ALIGN=
 3
    57 00000000         __heap_base
    58 00000000         Heap_Mem
@@ -560,7 +560,7 @@ ARM Macro Assembler    Page 9
               00000000 
               00000000 
               00000000 
-              00000200 
+              00000400 
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
 erwork --depend=.\objects\startup_msp432p4111_uvision.d -o.\objects\startup_msp
@@ -593,7 +593,7 @@ Symbol: Stack_Mem
       At line 328 in file RTE\Device\MSP432P4111\startup_msp432p4111_uvision.s
       At line 330 in file RTE\Device\MSP432P4111\startup_msp432p4111_uvision.s
 
-__initial_sp 00000200
+__initial_sp 00000400
 
 Symbol: __initial_sp
    Definitions
@@ -1237,7 +1237,7 @@ Symbol: Heap_Size
       At line 58 in file RTE\Device\MSP432P4111\startup_msp432p4111_uvision.s
       At line 329 in file RTE\Device\MSP432P4111\startup_msp432p4111_uvision.s
 
-Stack_Size 00000200
+Stack_Size 00000400
 
 Symbol: Stack_Size
    Definitions

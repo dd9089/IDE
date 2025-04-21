@@ -237,7 +237,7 @@ int main(void)
 	uart0_init();
   uart2_init();
 	uart0_put("\r\nLab5 CAMERA demo\r\n");
-  uart2_put("BLuetooth test");
+  //uart2_put("BLuetooth test");
 	
 	uart0_put("\r\nINIT LEDs\r\n");
 	LED1_Init();
@@ -272,7 +272,8 @@ int main(void)
 	while(1)
 	{
 		int pre_num_white = num_white, pre_pre_num_white = pre_num_white;
-		int error = 0, num_white = 0, middle = 0;
+		float error = 0.0;
+		int num_white = 0, middle = 0;
 		uint16_t pos[128];
 //		int low_max, low_delta = 0;
 //		int high_max, high_delta = 0;
@@ -295,32 +296,43 @@ int main(void)
 		}
 		
 		if (num_white == 0){
-			SW1 = FALSE;
-			Toggle_Motor(SW1);
-			uart2_put("num_white=0"); //this will tell us if it doesn't see any white
+//			SW1 = FALSE;
+//			Toggle_Motor(SW1);
+			//uart2_put("num_white=0"); //this will tell us if it doesn't see any white
 		}
 		middle = num_white / 2;
 		error = 64 - pos[middle];
 //				sprintf(str,"\n%i\n\r", error);
 //				uart2_put(str);
-		static float Kp = 0.00305, Ki = 0.0005, Kd = 0.003;
-		static float errInt = 0, errOld = 0;
+		static float Kp = 0.45, Ki = 0.00, Kd = 0.000;
+		static float errOld = 0, errOld2 = 0;
 		float dt = 0.01; // approx loop time
+		float PID_Thresh = 0.001;
+		float pwmOld = 0.075f;
+		
 
 		if (SW1) {
-				float err = (float)error;
-				errInt += err * dt;
+				float errP = error - errOld;
+				float errInt = (error + errOld) /2 ;
+				float derr = (error - 2*errOld + errOld2);
 //				if (errInt > 15.0f) errInt = 15.0f;
 //				if (errInt < -15.0f) errInt = -15.0f;
 
-				float derr = (err - errOld) / dt;
-				float control = Kp * err + Ki * errInt + Kd * derr;
+				float control = Kp * errP + Ki * errInt + Kd * derr;
 
-				float pwm = 0.075f + control;  // 0.075 is center
-//				sprintf(str, "%lf \n\r", control);
-//				uart2_put(str);
+//				if (control < PID_Thresh || control > -PID_Thresh){
+//					control = 0;
+//				}
+
+				float pwm = pwmOld + control;  // 0.075 is center
+//				char buff[100];
+//				sprintf(buff, "Control = %.2f\r\n", control);
+//				uart2_put(buff);
 				servo_turn(pwm);  // update PWM output
-				errOld = err;
+			  
+			  pwmOld = pwm;
+				errOld2 = errOld;
+				errOld = error;
 //				TIMER_A0_PWM_DutyCycle(0.35, 2);
 //				TIMER_A0_PWM_DutyCycle(0.35, 4);
 			
@@ -328,14 +340,14 @@ int main(void)
 					TIMER_A0_PWM_DutyCycle(0.30, 2);
 					TIMER_A0_PWM_DutyCycle(0.30, 4);
 				}
-				else if (pwm < 0.07){
+				else if (pwm < 0.07){ //right
 					TIMER_A0_PWM_DutyCycle(0.30, 2);
 					TIMER_A0_PWM_DutyCycle(0.30, 4);
 				}
 				else{
 					// drive motors straight
-					TIMER_A0_PWM_DutyCycle(0.4, 2);
-					TIMER_A0_PWM_DutyCycle(0.4, 4);
+					TIMER_A0_PWM_DutyCycle(0.35, 2);
+					TIMER_A0_PWM_DutyCycle(0.35, 4);
 				}
 		}
 

@@ -10,10 +10,7 @@
 #include "TimerA.h"
 
 
-void servo_init(void){
-		// Print welcome over serial
-	uart0_put("Running... \n\r");
-	
+void servo_init(void){	
 	//Part 1 - UNCOMMENT THIS
 	// Generate 20% duty cycle at 10kHz
 	TIMER_A2_PWM_Init((800), 0.075, 1); //maybe change this to make servo respond faster?

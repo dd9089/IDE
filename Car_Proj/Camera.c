@@ -103,7 +103,7 @@ int runningAverage(const uint16_t *input, uint16_t *output, int length, int wind
     }
 //		sprintf(str, "max: %i min: %i\n\r", max, min);
 //		uart2_put(str);
-	return (max * 0.95);
+	return (max * 0.9);
 }
 
 //
@@ -267,8 +267,11 @@ int main(void)
 	uart0_put("\r\nInterrupts successfully enabled\r\n");
 	
 	high_thresh = runningAverage(line, data, 128, 5);
+	int num_white = 0;
+
 	while(1)
 	{
+		int pre_num_white = num_white, pre_pre_num_white = pre_num_white;
 		int error = 0, num_white = 0, middle = 0;
 		uint16_t pos[128];
 //		int low_max, low_delta = 0;
@@ -290,6 +293,7 @@ int main(void)
 			}
 			
 		}
+		
 		if (num_white == 0){
 			SW1 = FALSE;
 			Toggle_Motor(SW1);
@@ -299,27 +303,40 @@ int main(void)
 		error = 64 - pos[middle];
 //				sprintf(str,"\n%i\n\r", error);
 //				uart2_put(str);
-		static float Kp = 0.0025, Ki = 0.0005, Kd = 0.001;
+		static float Kp = 0.00305, Ki = 0.0005, Kd = 0.003;
 		static float errInt = 0, errOld = 0;
 		float dt = 0.01; // approx loop time
 
 		if (SW1) {
 				float err = (float)error;
 				errInt += err * dt;
-				if (errInt > 15.0f) errInt = 15.0f;
-				if (errInt < -15.0f) errInt = -15.0f;
+//				if (errInt > 15.0f) errInt = 15.0f;
+//				if (errInt < -15.0f) errInt = -15.0f;
 
 				float derr = (err - errOld) / dt;
 				float control = Kp * err + Ki * errInt + Kd * derr;
 
 				float pwm = 0.075f + control;  // 0.075 is center
-
+//				sprintf(str, "%lf \n\r", control);
+//				uart2_put(str);
 				servo_turn(pwm);  // update PWM output
 				errOld = err;
-
-				// drive motors straight
-				TIMER_A0_PWM_DutyCycle(0.3, 2);
-				TIMER_A0_PWM_DutyCycle(0.3, 4);
+//				TIMER_A0_PWM_DutyCycle(0.35, 2);
+//				TIMER_A0_PWM_DutyCycle(0.35, 4);
+			
+				if (pwm > 0.08 ){ //left
+					TIMER_A0_PWM_DutyCycle(0.30, 2);
+					TIMER_A0_PWM_DutyCycle(0.30, 4);
+				}
+				else if (pwm < 0.07){
+					TIMER_A0_PWM_DutyCycle(0.30, 2);
+					TIMER_A0_PWM_DutyCycle(0.30, 4);
+				}
+				else{
+					// drive motors straight
+					TIMER_A0_PWM_DutyCycle(0.4, 2);
+					TIMER_A0_PWM_DutyCycle(0.4, 4);
+				}
 		}
 
 				

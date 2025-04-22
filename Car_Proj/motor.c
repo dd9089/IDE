@@ -15,7 +15,7 @@
 #include "uart.h"
 #include "TimerA.h"
 
-static char str[100];
+//static char str[100];
 
 
 //2.5 and 2.7 in car tester

@@ -12,7 +12,7 @@ extern uint32_t SystemCoreClock;
 
 // default SI integration time is 7.5ms = 133Hz
 //
-#define INTEGRATION_TIME .05f //we change this value to callibrate for lighting
+#define INTEGRATION_TIME .009f //we change this value to callibrate for lighting
 
 
 

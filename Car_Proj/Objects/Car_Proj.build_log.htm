@@ -5,7 +5,7 @@
 <h2>Tool Versions:</h2>
 IDE-Version: µVision V5.24.2.0
 Copyright (C) 2017 ARM Ltd and ARM Germany GmbH. All rights reserved.
-License Information: Rick Tolleson, Rochester Institute of Technology, LIC=----
+License Information: D Peon, RIT, LIC=----
  
 Tool Versions:
 Toolchain:       MDK-Lite  Version: 5.24.1
@@ -21,29 +21,27 @@ Target DLL:      CMSIS_AGDI.dll V1.28.3.0
 Dialog DLL:      TCM.DLL V1.32.0.0
  
 <h2>Project:</h2>
-D:\IDE Lab\IDE\Car_Proj\Car_Proj.uvprojx
-Project File Date:  04/21/2025
+C:\Users\diego\Documents\IDE\Car_Proj\Car_Proj.uvprojx
+Project File Date:  04/16/2025
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 5 (build 528)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'Target 1'
 compiling Camera.c...
-Camera.c(339): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+Camera.c(328): warning:  #1035-D: single-precision operand implicitly converted to double-precision
   				if (pwm > 0.08 ){ //left
-Camera.c(343): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-  				else if (pwm < 0.07){ //right
+Camera.c(332): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  				else if (pwm < 0.07){
 Camera.c(274): warning:  #177-D: variable "pre_pre_num_white"  was declared but never referenced
   		int pre_num_white = num_white, pre_pre_num_white = pre_num_white;
-Camera.c(309): warning:  #177-D: variable "dt"  was declared but never referenced
-  		float dt = 0.01; // approx loop time
-Camera.c(310): warning:  #177-D: variable "PID_Thresh"  was declared but never referenced
-  		float PID_Thresh = 0.001;
+Camera.c(375): warning:  #1-D: last line of file ends without a newline
+  		}
 Camera.c(50): warning:  #177-D: variable "str"  was declared but never referenced
   static char str[100];
-Camera.c: 6 warnings, 0 errors
+Camera.c: 5 warnings, 0 errors
 linking...
-Program Size: Code=6592 RO-data=356 RW-data=80 ZI-data=1776  
-".\Objects\Car_Proj.axf" - 0 Error(s), 6 Warning(s).
+Program Size: Code=6660 RO-data=356 RW-data=80 ZI-data=1776  
+".\Objects\Car_Proj.axf" - 0 Error(s), 5 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -67,14 +65,14 @@ Package Vendor: TexasInstruments
 <h2>Collection of Component Files used:</h2>
 
    * Component: TexasInstruments::Device:Startup:3.2.2
-      Include file:  Device\Include\msp_compatibility.h
-      Source file:   Device\Source\system_msp432p4111.c
-      Source file:   Examples\EmptyMain\main.c
-      Source file:   Examples\BlinkLED\blinkLED.c
       Source file:   Device\Source\startup_msp432p4111_uvision.s
+      Source file:   Device\Source\system_msp432p4111.c
+      Source file:   Examples\BlinkLED\blinkLED.c
+      Source file:   Examples\EmptyMain\main.c
+      Include file:  Device\Include\msp_compatibility.h
 
    * Component: ARM::CMSIS:CORE:5.6.0
-Build Time Elapsed:  00:00:01
+Build Time Elapsed:  00:00:02
 </pre>
 </body>
 </html>

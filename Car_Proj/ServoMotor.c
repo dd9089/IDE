@@ -28,7 +28,7 @@ void servo_2center(void){
 	TIMER_A2_PWM_DutyCycle(0.075, 1);
 }
 
-void servo_turn(float duty){
+void servo_turn(double duty){
 	TIMER_A2_PWM_DutyCycle(duty, 1);
 }
 

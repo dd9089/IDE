@@ -47,7 +47,7 @@ uint16_t data[128];
 
 extern BOOLEAN g_sendData;
 
-static char str[100];
+//static char str[100];
 
 BOOLEAN SW1 = FALSE;
 BOOLEAN SW2 = FALSE;
@@ -103,7 +103,7 @@ int runningAverage(const uint16_t *input, uint16_t *output, int length, int wind
     }
 //		sprintf(str, "max: %i min: %i\n\r", max, min);
 //		uart2_put(str);
-	return (max * 0.8);
+	return (max * 0.7);
 }
 
 //
@@ -200,17 +200,14 @@ void PORT1_IRQHandler(void)
 		// acknowledge P1.1 is pressed, by setting BIT1 to zero - remember P1.1 is switch 1
 		// clear flag, acknowledge
 		//uart0_put("\r\nIRQ Handler SW 1\r\n");
+		
     P1 -> IFG &= ~BIT1;
 		SW1 = !SW1;
 		Toggle_Motor(SW1);
 	}
 	// Now check to see if it came from Switch2 ?
   if(P1->IFG & BIT4)
-	{
-		// Switch 2 Pressed
-		
-		// acknowledge P1.4 is pressed, by setting BIT4 to zero - remember P1.4 is switch 2
-		//uart0_put("\r\nIRQ Handler SW 2\r\n");    
+	{ 
 		P1 -> IFG &= ~BIT4;     // clear flag4, acknowledge
 		SW2 = !SW2; //toggle switch 1/LED 1 state
 		
@@ -227,10 +224,6 @@ void PORT1_IRQHandler(void)
 /////////////////////////////////////////////////////
 int main(void)
 {	
-  //bluetooth print trackers
-//  BOOLEAN L = 0;
-//  BOOLEAN C = 0;
-//  BOOLEAN R = 0;
 	uint16_t high_thresh = 0;
 	//initializations
 	DisableInterrupts();
@@ -253,8 +246,6 @@ int main(void)
 //	OLED_display_clear();
 //	OLED_display_on();
 
-	// remember that we double the desired frequency because we need to account for aliasing
-
 	uart0_put("\r\nINIT Camera CLK and SI\r\n");
 	uart0_put("\r\nINIT ADC\r\n");	
 	INIT_Camera();
@@ -267,109 +258,63 @@ int main(void)
 	uart0_put("\r\nInterrupts successfully enabled\r\n");
 	
 	high_thresh = runningAverage(line, data, 128, 5);
-	int num_white = 0;
-
+	
 	while(1)
 	{
-		int pre_num_white = num_white, pre_pre_num_white = pre_num_white;
 		int error = 0, num_white = 0, middle = 0;
 		uint16_t pos[128];
-//		int low_max, low_delta = 0;
-//		int high_max, high_delta = 0;
 		runningAverage(line, data, 128, 5);
-//		for (int i = 0; i < 64; i++){ //64 marks the next half
-//			if (data[i] >= high_thresh){
-//				low_delta++;
-//			}
-//			if(data[i + 64] >= high_thresh){
-//				high_delta++;
-//			}
-//		}
+
 
 		for (int i=0; i < 128; i++){
 			if (line[i] >= high_thresh){
 				pos[num_white] = i;
 				num_white += 1;
 			}
-			
 		}
-		
 		if (num_white == 0){
 			SW1 = FALSE;
 			Toggle_Motor(SW1);
-			uart2_put("num_white=0"); //this will tell us if it doesn't see any white
 		}
 		else SW1 = TRUE;
 		middle = num_white / 2;
 		error = 64 - pos[middle];
-//				sprintf(str,"\n%i\n\r", error);
-//				uart2_put(str);
-		static float Kp = 0.001, Ki = 0.00001, Kd = 0.00001;
-		static float errInt = 0, errOld = 0;
-		float dt = 0.007; // approx loop time
+		
+		static float Kp = 0.00048; //, Ki = 0.0000, Kd = 0.000;
+	//	static float errInt = 0, errOld = 0;
+//		float dt = 0.007; // approx loop time
 
 		if (SW1) {
 				float err = (float)error;
-				errInt += err * dt;
-//				if (errInt > 15.0f) errInt = 15.0f;
-//				if (errInt < -15.0f) errInt = -15.0f;
+				//errInt += err * dt;
 
-				float derr = (err - errOld) / dt;
-				float control = Kp * err + Ki * errInt + Kd * derr;
+				//float derr = (err - errOld) / dt;
+				float control = Kp * err;// + Kd * derr; //+ Ki * errInt
 
-				float pwm = 0.075f + control;  // 0.075 is center
-//				sprintf(str, "%lf \n\r", control);
-//				uart2_put(str);
+				float pwm = 0.075f + control*1.1;  // 0.075 is center
+
 				servo_turn(pwm);  // update PWM output
-				errOld = err;
-//				TIMER_A0_PWM_DutyCycle(0.35, 2);
-//				TIMER_A0_PWM_DutyCycle(0.35, 4);
-			
-				if (pwm > 0.08 ){ //left
-					TIMER_A0_PWM_DutyCycle(0.37, 2);
-					TIMER_A0_PWM_DutyCycle(0.29, 4);
+//				errOld = err;
+
+				if (pwm > 0.09 ){ //left
+					TIMER_A0_PWM_DutyCycle(0.47, 2);
+					TIMER_A0_PWM_DutyCycle(0.3, 4);
 				}
-				else if (pwm < 0.07){
-					TIMER_A0_PWM_DutyCycle(0.29, 2);
-					TIMER_A0_PWM_DutyCycle(0.37, 4);
+				else if (pwm < 0.06){
+					TIMER_A0_PWM_DutyCycle(0.3, 2);
+					TIMER_A0_PWM_DutyCycle(0.47, 4);
 				}
 				else{
 					// drive motors straight
-					TIMER_A0_PWM_DutyCycle(0.46, 2);
-					TIMER_A0_PWM_DutyCycle(0.46, 4);
+					TIMER_A0_PWM_DutyCycle(0.47, 2);
+					TIMER_A0_PWM_DutyCycle(0.47, 4);
 				}
 		}
 
 				
-		//		OLED_DisplayCameraData(line);
-
-		//		sprintf(str,"%i %i %i\n\r", low_delta, high_delta, high_thresh);
-		//		uart0_put(str);
-		//		
-		//		if (abs(low_delta - high_delta) <= 2){
-		//			servo_2center();
-		//			uart0_put("Center\r\n");
-		//      L = 0;
-		//      R = 0;
-		//      C = 1;
-		//		}
-		//		else if(low_delta > high_delta){
-		//			servo_2left();
-		//			uart0_put("Left\r\n");
-		//      L = 1;
-		//      R = 0;
-		//      C = 0;
-		//		}
-		//		else{
-		//			servo_2right();
-		//			uart0_put("Right\r\n");
-		//      L = 0;
-		//      R = 1;
-		//      C = 0;
-		//		}
+				//OLED_DisplayCameraData(line);
 
 				// do a small delay
-				myDelay(); //change implemention to make servo respond faster
+				//myDelay(); //change implemention to make servo respond faster
 			}
-			
 		}

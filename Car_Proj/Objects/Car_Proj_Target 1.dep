@@ -14,7 +14,7 @@ I (Common.h)(0x67F40311)
 I (CortexM.h)(0x67F40311)
 I (ADC14.h)(0x67F40311)
 F (.\ADC14.h)(0x67F40311)()
-F (.\Camera.c)(0x6807EECA)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\TexasInstruments\MSP432P4xx_DFP\3.2.6\Device\Include-D__UVISION_VERSION="524" -D_RTE_ -D__MSP432P4111__-o .\objects\camera.o --omf_browse .\objects\camera.crf --depend .\objects\camera.d)
+F (.\Camera.c)(0x680C6AF1)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\TexasInstruments\MSP432P4xx_DFP\3.2.6\Device\Include-D__UVISION_VERSION="524" -D_RTE_ -D__MSP432P4111__-o .\objects\camera.o --omf_browse .\objects\camera.crf --depend .\objects\camera.d)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x588C2C04)
 I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x588C2C04)
 I (C:\Keil_v5\ARM\PACK\TexasInstruments\MSP432P4xx_DFP\3.2.6\Device\Include\msp.h)(0x5B69F944)
@@ -40,7 +40,7 @@ I (motor.h)(0x67F7033F)
 I (oled.h)(0x67F40311)
 I (switches.h)(0x67F7033F)
 F (.\Common.h)(0x67F40311)()
-F (.\ControlPins.c)(0x6807DB66)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\TexasInstruments\MSP432P4xx_DFP\3.2.6\Device\Include-D__UVISION_VERSION="524" -D_RTE_ -D__MSP432P4111__-o .\objects\controlpins.o --omf_browse .\objects\controlpins.crf --depend .\objects\controlpins.d)
+F (.\ControlPins.c)(0x680C1855)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\TexasInstruments\MSP432P4xx_DFP\3.2.6\Device\Include-D__UVISION_VERSION="524" -D_RTE_ -D__MSP432P4111__-o .\objects\controlpins.o --omf_browse .\objects\controlpins.crf --depend .\objects\controlpins.d)
 I (C:\Keil_v5\ARM\PACK\TexasInstruments\MSP432P4xx_DFP\3.2.6\Device\Include\msp.h)(0x5B69F944)
 I (C:\Keil_v5\ARM\PACK\TexasInstruments\MSP432P4xx_DFP\3.2.6\Device\Include\msp432p4111.h)(0x5B69F944)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x588C2C04)

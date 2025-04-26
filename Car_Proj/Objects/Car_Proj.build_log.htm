@@ -22,36 +22,21 @@ Dialog DLL:      TCM.DLL V1.32.0.0
  
 <h2>Project:</h2>
 C:\Users\diego\Documents\IDE\Car_Proj\Car_Proj.uvprojx
-Project File Date:  04/16/2025
+Project File Date:  04/26/2025
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 5 (build 528)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
-Rebuild target 'Target 1'
-assembling startup_msp432p4111_uvision.s...
-compiling CortexM.c...
-compiling ADC14.c...
-compiling i2c.c...
-compiling ServoMotor.c...
-compiling motor.c...
-compiling oled.c...
-compiling TimerA.c...
-compiling uart.c...
-compiling SysTickTimer.c...
-compiling leds.c...
-compiling Timer32.c...
-compiling switches.c...
-compiling ControlPins.c...
-compiling system_msp432p4111.c...
+Build target 'Target 1'
 compiling Camera.c...
-Camera.c(294): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+Camera.c(296): warning:  #1035-D: single-precision operand implicitly converted to double-precision
   				float pwm = 0.075f + control*1.1;  // 0.075 is center
-Camera.c(299): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+Camera.c(301): warning:  #1035-D: single-precision operand implicitly converted to double-precision
   				if (pwm > 0.09 ){ //left
-Camera.c(303): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+Camera.c(305): warning:  #1035-D: single-precision operand implicitly converted to double-precision
   				else if (pwm < 0.06){
 Camera.c: 3 warnings, 0 errors
 linking...
-Program Size: Code=7464 RO-data=356 RW-data=64 ZI-data=1672  
+Program Size: Code=7552 RO-data=356 RW-data=72 ZI-data=1672  
 ".\Objects\Car_Proj.axf" - 0 Error(s), 3 Warning(s).
 
 <h2>Software Packages used:</h2>
@@ -76,14 +61,14 @@ Package Vendor: TexasInstruments
 <h2>Collection of Component Files used:</h2>
 
    * Component: TexasInstruments::Device:Startup:3.2.2
-      Source file:   Examples\EmptyMain\main.c
       Source file:   Device\Source\startup_msp432p4111_uvision.s
       Include file:  Device\Include\msp_compatibility.h
-      Source file:   Device\Source\system_msp432p4111.c
       Source file:   Examples\BlinkLED\blinkLED.c
+      Source file:   Device\Source\system_msp432p4111.c
+      Source file:   Examples\EmptyMain\main.c
 
    * Component: ARM::CMSIS:CORE:5.6.0
-Build Time Elapsed:  00:00:01
+Build Time Elapsed:  00:00:02
 </pre>
 </body>
 </html>

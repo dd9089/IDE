@@ -44,7 +44,10 @@
 // line stores the current array of camera data
 extern uint16_t line[128];
 uint16_t data[128];
-
+float straightSpeed = 0.5;
+float fastWheel = 0.5;
+float slowWheel = 0.25;
+		
 extern BOOLEAN g_sendData;
 
 //static char str[100];
@@ -202,15 +205,17 @@ void PORT1_IRQHandler(void)
 		//uart0_put("\r\nIRQ Handler SW 1\r\n");
 		
     P1 -> IFG &= ~BIT1;
-		SW1 = !SW1;
-		Toggle_Motor(SW1);
+		straightSpeed = 0.5;
+		fastWheel = 0.4;
+		slowWheel = 0.4;
 	}
 	// Now check to see if it came from Switch2 ?
   if(P1->IFG & BIT4)
 	{ 
 		P1 -> IFG &= ~BIT4;     // clear flag4, acknowledge
-		SW2 = !SW2; //toggle switch 1/LED 1 state
-		
+		straightSpeed = 0.5;
+		fastWheel = 0.5;
+		slowWheel = 0.2;
 		
   }
 	
@@ -263,8 +268,6 @@ int main(void)
 	{
 		int error = 0, num_white = 0, middle = 0;
 		uint16_t pos[128];
-		runningAverage(line, data, 128, 5);
-
 
 		for (int i=0; i < 128; i++){
 			if (line[i] >= high_thresh){
@@ -274,13 +277,12 @@ int main(void)
 		}
 		if (num_white == 0){
 			SW1 = FALSE;
-			Toggle_Motor(SW1);
-		}
-		else SW1 = TRUE;
+			Toggle_Motor(TRUE);
+		} else SW1 = TRUE;
 		middle = num_white / 2;
 		error = 64 - pos[middle];
 		
-		static float Kp = 0.00048; //, Ki = 0.0000, Kd = 0.000;
+		static float Kp = 0.00046; //, Ki = 0.0000, Kd = 0.000;
 	//	static float errInt = 0, errOld = 0;
 //		float dt = 0.007; // approx loop time
 
@@ -297,22 +299,21 @@ int main(void)
 //				errOld = err;
 
 				if (pwm > 0.09 ){ //left
-					TIMER_A0_PWM_DutyCycle(0.47, 2);
-					TIMER_A0_PWM_DutyCycle(0.3, 4);
+					TIMER_A0_PWM_DutyCycle(fastWheel, 2);
+					TIMER_A0_PWM_DutyCycle(slowWheel, 4);
 				}
 				else if (pwm < 0.06){
-					TIMER_A0_PWM_DutyCycle(0.3, 2);
-					TIMER_A0_PWM_DutyCycle(0.47, 4);
+					TIMER_A0_PWM_DutyCycle(slowWheel, 2);
+					TIMER_A0_PWM_DutyCycle(fastWheel, 4);
 				}
 				else{
 					// drive motors straight
-					TIMER_A0_PWM_DutyCycle(0.47, 2);
-					TIMER_A0_PWM_DutyCycle(0.47, 4);
+					TIMER_A0_PWM_DutyCycle(straightSpeed, 2);
+					TIMER_A0_PWM_DutyCycle(straightSpeed, 4);
 				}
-		}
 
-				
-				//OLED_DisplayCameraData(line);
+			}
+//				OLED_DisplayCameraData(line);
 
 				// do a small delay
 				//myDelay(); //change implemention to make servo respond faster

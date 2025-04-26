@@ -14,7 +14,7 @@ I (Common.h)(0x67F40311)
 I (CortexM.h)(0x67F40311)
 I (ADC14.h)(0x67F40311)
 F (.\ADC14.h)(0x67F40311)()
-F (.\Camera.c)(0x680C6AF1)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\TexasInstruments\MSP432P4xx_DFP\3.2.6\Device\Include-D__UVISION_VERSION="524" -D_RTE_ -D__MSP432P4111__-o .\objects\camera.o --omf_browse .\objects\camera.crf --depend .\objects\camera.d)
+F (.\Camera.c)(0x680CFBAA)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\TexasInstruments\MSP432P4xx_DFP\3.2.6\Device\Include-D__UVISION_VERSION="524" -D_RTE_ -D__MSP432P4111__-o .\objects\camera.o --omf_browse .\objects\camera.crf --depend .\objects\camera.d)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x588C2C04)
 I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x588C2C04)
 I (C:\Keil_v5\ARM\PACK\TexasInstruments\MSP432P4xx_DFP\3.2.6\Device\Include\msp.h)(0x5B69F944)
@@ -34,13 +34,13 @@ I (Timer32.h)(0x67F40311)
 I (CortexM.h)(0x67F40311)
 I (ADC14.h)(0x67F40311)
 I (ControlPins.h)(0x67F40311)
-I (ServoMotor.h)(0x680728C1)
+I (ServoMotor.h)(0x680C8A4A)
 I (TimerA.h)(0x67F40311)
-I (motor.h)(0x67F7033F)
+I (motor.h)(0x680C8A4A)
 I (oled.h)(0x67F40311)
-I (switches.h)(0x67F7033F)
+I (switches.h)(0x680C8A4A)
 F (.\Common.h)(0x67F40311)()
-F (.\ControlPins.c)(0x680C1855)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\TexasInstruments\MSP432P4xx_DFP\3.2.6\Device\Include-D__UVISION_VERSION="524" -D_RTE_ -D__MSP432P4111__-o .\objects\controlpins.o --omf_browse .\objects\controlpins.crf --depend .\objects\controlpins.d)
+F (.\ControlPins.c)(0x680CE00E)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\TexasInstruments\MSP432P4xx_DFP\3.2.6\Device\Include-D__UVISION_VERSION="524" -D_RTE_ -D__MSP432P4111__-o .\objects\controlpins.o --omf_browse .\objects\controlpins.crf --depend .\objects\controlpins.d)
 I (C:\Keil_v5\ARM\PACK\TexasInstruments\MSP432P4xx_DFP\3.2.6\Device\Include\msp.h)(0x5B69F944)
 I (C:\Keil_v5\ARM\PACK\TexasInstruments\MSP432P4xx_DFP\3.2.6\Device\Include\msp432p4111.h)(0x5B69F944)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x588C2C04)
@@ -120,7 +120,7 @@ I (C:\Keil_v5\ARM\PACK\TexasInstruments\MSP432P4xx_DFP\3.2.6\Device\Include\syst
 I (uart.h)(0x67F40311)
 I (Common.h)(0x67F40311)
 F (.\uart.h)(0x67F40311)()
-F (.\ServoMotor.c)(0x680728B0)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\TexasInstruments\MSP432P4xx_DFP\3.2.6\Device\Include-D__UVISION_VERSION="524" -D_RTE_ -D__MSP432P4111__-o .\objects\servomotor.o --omf_browse .\objects\servomotor.crf --depend .\objects\servomotor.d)
+F (.\ServoMotor.c)(0x680C8A4A)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\TexasInstruments\MSP432P4xx_DFP\3.2.6\Device\Include-D__UVISION_VERSION="524" -D_RTE_ -D__MSP432P4111__-o .\objects\servomotor.o --omf_browse .\objects\servomotor.crf --depend .\objects\servomotor.d)
 I (C:\Keil_v5\ARM\PACK\TexasInstruments\MSP432P4xx_DFP\3.2.6\Device\Include\msp.h)(0x5B69F944)
 I (C:\Keil_v5\ARM\PACK\TexasInstruments\MSP432P4xx_DFP\3.2.6\Device\Include\msp432p4111.h)(0x5B69F944)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x588C2C04)
@@ -134,7 +134,7 @@ I (C:\Keil_v5\ARM\PACK\TexasInstruments\MSP432P4xx_DFP\3.2.6\Device\Include\syst
 I (uart.h)(0x67F40311)
 I (Common.h)(0x67F40311)
 I (TimerA.h)(0x67F40311)
-F (.\ServoMotor.h)(0x680728C1)()
+F (.\ServoMotor.h)(0x680C8A4A)()
 F (.\TimerA.c)(0x67F40311)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\TexasInstruments\MSP432P4xx_DFP\3.2.6\Device\Include-D__UVISION_VERSION="524" -D_RTE_ -D__MSP432P4111__-o .\objects\timera.o --omf_browse .\objects\timera.crf --depend .\objects\timera.d)
 I (C:\Keil_v5\ARM\PACK\TexasInstruments\MSP432P4xx_DFP\3.2.6\Device\Include\msp.h)(0x5B69F944)
 I (C:\Keil_v5\ARM\PACK\TexasInstruments\MSP432P4xx_DFP\3.2.6\Device\Include\msp432p4111.h)(0x5B69F944)
@@ -151,8 +151,8 @@ I (TimerA.h)(0x67F40311)
 I (uart.h)(0x67F40311)
 I (Common.h)(0x67F40311)
 F (.\TimerA.h)(0x67F40311)()
-F (.\motor.h)(0x67F7033F)()
-F (.\motor.c)(0x6807283E)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\TexasInstruments\MSP432P4xx_DFP\3.2.6\Device\Include-D__UVISION_VERSION="524" -D_RTE_ -D__MSP432P4111__-o .\objects\motor.o --omf_browse .\objects\motor.crf --depend .\objects\motor.d)
+F (.\motor.h)(0x680C8A4A)()
+F (.\motor.c)(0x680C9980)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\TexasInstruments\MSP432P4xx_DFP\3.2.6\Device\Include-D__UVISION_VERSION="524" -D_RTE_ -D__MSP432P4111__-o .\objects\motor.o --omf_browse .\objects\motor.crf --depend .\objects\motor.d)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x588C2C04)
 I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x588C2C04)
 I (C:\Keil_v5\ARM\PACK\TexasInstruments\MSP432P4xx_DFP\3.2.6\Device\Include\msp.h)(0x5B69F944)
@@ -212,9 +212,9 @@ I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\CMSIS\Core\Include\cmsis_compiler.h)(0x62
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\CMSIS\Core\Include\cmsis_armcc.h)(0x627001AE)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\CMSIS\Core\Include\mpu_armv7.h)(0x627001AE)
 I (C:\Keil_v5\ARM\PACK\TexasInstruments\MSP432P4xx_DFP\3.2.6\Device\Include\system_msp432p4111.h)(0x5B69F946)
-I (Switches.h)(0x67F7033F)
+I (Switches.h)(0x680C8A4A)
 I (Common.h)(0x67F40311)
-F (.\switches.h)(0x67F7033F)()
+F (.\switches.h)(0x680C8A4A)()
 F (RTE\Device\MSP432P4111\startup_msp432p4111_uvision.s)(0x6807055A)(--cpu Cortex-M4.fp --pd "__EVAL SETA 1" -g --apcs=interwork -I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\TexasInstruments\MSP432P4xx_DFP\3.2.6\Device\Include--pd "__UVISION_VERSION SETA 524" --pd "_RTE_ SETA 1" --pd "__MSP432P4111__ SETA 1"--list .\listings\startup_msp432p4111_uvision.lst --xref -o .\objects\startup_msp432p4111_uvision.o --depend .\objects\startup_msp432p4111_uvision.d)
 F (RTE\Device\MSP432P4111\system_msp432p4111.c)(0x67F40311)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\TexasInstruments\MSP432P4xx_DFP\3.2.6\Device\Include-D__UVISION_VERSION="524" -D_RTE_ -D__MSP432P4111__-o .\objects\system_msp432p4111.o --omf_browse .\objects\system_msp432p4111.crf --depend .\objects\system_msp432p4111.d)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x588C2C04)

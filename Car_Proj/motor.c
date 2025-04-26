@@ -45,12 +45,6 @@ void motor_init(void){
 }
 
 void Toggle_Motor(BOOLEAN State){
-	if (!State){
 		TIMER_A0_PWM_DutyCycle(0, 2); //2.5 left motor
 		TIMER_A0_PWM_DutyCycle(0, 4); //2.7 right motor
-	}
-	else{
-		TIMER_A0_PWM_DutyCycle(0, 2); //2.5 left motor
-		TIMER_A0_PWM_DutyCycle(0, 4); //2.7 right motor
-	}
 }
